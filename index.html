@@ -286,19 +286,6 @@ main{counter-reset:sec}
 .bcard--photo p{color:#d6d6d1}
 .bcard__big{font-size:clamp(60px,5.4vw,96px);font-weight:300;letter-spacing:-.06em;line-height:.9}
 
-/* ---------- team ---------- */
-.team{background:var(--paper);padding-top:0}
-.team__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,96px);align-items:end}
-.team__copy .h2{margin:22px 0 28px;max-width:12ch}
-.team__contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
-.team__photos{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:12px;align-items:end}
-.team__side{display:grid;gap:12px}
-.team__ph{margin:0}
-.team__img{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r);background:var(--paper-2)}
-.team__side .team__img{aspect-ratio:1/1}
-.team__img img{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover}
-.team__ph figcaption{display:flex;gap:12px;padding-top:12px;font-size:17px;line-height:1.35;color:var(--g6)}
-.team__ph figcaption span{font:500 16px/1.45 var(--mono);color:var(--g5)}
 
 /* ---------- gallery: frames from the sites ---------- */
 .gal{background:var(--black);color:var(--white);padding:clamp(96px,11vw,170px) 0}
@@ -446,7 +433,7 @@ main{counter-reset:sec}
   .hero__content{width:auto;right:var(--pad);gap:22px}
   .hero__lead{margin-bottom:22px}
   .scroll-cue{display:none}
-  .sec-head,.gal__head,.team__grid{grid-template-columns:1fr}
+  .sec-head,.gal__head{grid-template-columns:1fr}
   .reel__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .calc__grid{grid-template-columns:1fr}
   .calc__visual{position:relative;top:0;height:auto;aspect-ratio:4/3}
@@ -487,10 +474,6 @@ main{counter-reset:sec}
   .bento{grid-template-columns:1fr}
   .bcard--ant{grid-column:auto;grid-row:auto;min-height:600px}
   .bcard--ant > div{max-width:none}
-  .team__photos{grid-template-columns:1fr 1fr}
-  .team__ph--main{grid-column:1/-1}
-  .team__ph--main .team__img{aspect-ratio:4/5}
-  .team__side{display:contents}
   .gal__track{--gh:min(118vw,470px)}
   .gal__item{max-width:84vw}
   .scards::after{height:calc(3 * 64px)}
@@ -739,28 +722,6 @@ main{counter-reset:sec}
   </div>
 </section>
 
-<!-- TEAM: the people next to the cargo -->
-<section class="sec team" id="team" aria-labelledby="team-title">
-  <div class="wrap team__grid">
-    <div class="team__copy">
-      <p class="eyebrow">Команда</p>
-      <h2 class="h2" id="team-title" data-split>Люди, які <em>відповідають за вантаж</em></h2>
-      <p class="lead" data-reveal>Поруч із вантажем і з клієнтами: на майданчиках, біля техніки та на галузевих подіях.</p>
-      <div class="team__contact" data-reveal>
-        <a class="btn btn--dark" href="https://wa.me/380732772377" target="_blank" rel="noopener" data-magnetic>Написати у WhatsApp<span class="btn__ico"><svg class="ico"><use href="#i-wa"/></svg></span></a>
-        <a class="btn btn--line btn--phone" href="tel:+380732772377"><svg class="ico"><use href="#i-phone"/></svg>+380 73 277 23 77</a>
-      </div>
-    </div>
-    <div class="team__photos">
-      <figure class="team__ph team__ph--main"><div class="team__img"><img src="assets/img/team-atlas-2.webp" alt="Представник Formica Logistics на тралі поруч із перевантажувачем Atlas" loading="lazy" decoding="async" style="object-position:50% 40%"></div><figcaption><span>01</span>Поруч із технікою</figcaption></figure>
-      <div class="team__side">
-        <figure class="team__ph"><div class="team__img"><img src="assets/img/team-atlas-1.webp" alt="Представник Formica Logistics біля кабіни перевантажувача Atlas" loading="lazy" decoding="async" style="object-position:50% 55%"></div><figcaption><span>02</span>Перевантажувач Atlas на тралі</figcaption></figure>
-        <figure class="team__ph"><div class="team__img"><img src="assets/img/team-expo.webp" alt="Представник Formica Logistics на галузевій виставці BIG FERT" loading="lazy" decoding="async" style="object-position:50% 30%"></div><figcaption><span>03</span>Галузева виставка BIG FERT</figcaption></figure>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- GALLERY: frames from the sites -->
 <section class="gal" id="gallery" aria-labelledby="gal-title">
   <div class="gal__stage">
@@ -906,7 +867,7 @@ main{counter-reset:sec}
   <div class="wrap">
     <div class="footer__grid">
       <div class="footer__about"><a class="logo" href="#top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="logo__name">FORMICA<span>LOGISTICS</span></span></a><p>Оперуючи процесом, прагнемо визначити майбутнє логістики.</p></div>
-      <div><h4>Навігація</h4><ul><li><a href="#process">Як працюємо</a></li><li><a href="#directions">Напрямки</a></li><li><a href="#services">Послуги</a></li><li><a href="#gallery">Об’єкти</a></li><li><a href="#team">Команда</a></li></ul></div>
+      <div><h4>Навігація</h4><ul><li><a href="#process">Як працюємо</a></li><li><a href="#directions">Напрямки</a></li><li><a href="#services">Послуги</a></li><li><a href="#gallery">Об’єкти</a></li></ul></div>
       <div><h4>Послуги</h4><ul><li>Портова перевалка</li><li>Стивідорні послуги</li><li>Складські послуги</li><li>Митне оформлення</li></ul></div>
       <div><h4>Контакти</h4><ul><li><a href="tel:+380732772377">+380 73 277 23 77</a></li><li><a href="https://wa.me/380732772377" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="#calc">Розрахунок вартості</a></li></ul></div>
     </div>
@@ -1208,9 +1169,6 @@ if (motion && ST) {
   G.from('.fig', { opacity: 0, y: 30, duration: 1, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.figs', start: 'top 85%' } });
   G.fromTo('.band img', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.band', start: 'top bottom', end: 'bottom top', scrub: true } });
 
-  /* team: photos open from the bottom and drift inside their frames */
-  G.from('.team__img', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut', stagger: 0.12, scrollTrigger: { trigger: '.team__photos', start: 'top 80%' } });
-  $$('.team__img img').forEach(img => G.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
   /* philosophy: words light up while scrolling */
   const pw = splitWords($('[data-words]'), 'pw');
