@@ -1,0 +1,1415 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Formica Logistics — портова логістика</title>
+<meta name="description" content="Портова перевалка, стивідорні та складські послуги, фасування, експедирування, митне оформлення, автомобільні та залізничні перевезення. 30 років досвіду.">
+<meta name="theme-color" content="#0b0b0b">
+<meta property="og:title" content="Formica Logistics — логістика, яка захоплює">
+<meta property="og:description" content="Порт, склад, авто та залізниця — в одних руках. 300 000+ тонн вантажообігу щороку.">
+<meta property="og:image" content="assets/img/port-night.webp">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%23111111'%3E%3Cpath fill-rule='evenodd' d='M2 41C2 32 12 27 24 26.5C36 26 46.5 32.5 53.2 42.2Q54.2 43.7 52.8 44.9C46 52 35 57.5 23 57.5C10 57.5 2 50 2 41ZM21.6 37C21.6 33.8 24.5 32 28.8 32C33.5 32 37 35.5 39 40.7C35.5 42 32 42.2 28.8 42.2C24.5 42.2 21.6 40.3 21.6 37Z'/%3E%3Cpath d='M14 29.5L32.7 9.1C33.3 8.4 34.1 8.8 35.4 8.8L57.8 8.3A4.2 4.2 0 0 1 57.8 16.7L37.5 12.4Q35.8 12.1 35 12.6L16.6 31.5Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300..700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/video/coils-hold.jpg">
+<link rel="preload" as="image" href="assets/video/bigbags.jpg">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --black:#0b0b0b;--char:#151515;--char-2:#1e1e1e;--ink:#111;
+  --g6:#5f5f5b;--g5:#7a7a76;--g4:#929290;--g3:#b9b9b4;--g2:#d8d7d2;
+  --paper:#f2f1ed;--paper-2:#e6e5e0;--white:#fff;
+  --line:rgba(17,17,17,.14);--line-d:rgba(255,255,255,.14);
+  --font:'Geologica',system-ui,-apple-system,'Segoe UI',sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --pad:clamp(20px,4vw,64px);--r:10px;--ease:cubic-bezier(.7,0,.2,1);--ease-out:cubic-bezier(.16,1,.3,1);
+  --fs:clamp(17px,.45vw + 14px,20px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 var(--fs)/1.55 var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+::selection{background:var(--ink);color:var(--white)}
+.on-dark ::selection{background:var(--white);color:var(--ink)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.symbols{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{width:min(100% - 2 * var(--pad),1600px);margin-inline:auto}
+.sec{padding:clamp(96px,11vw,190px) 0}
+.on-dark{background:var(--black);color:var(--white)}
+
+/* split text */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.12em 0 .1em;margin:-.12em 0 -.1em}
+.wi{display:inline-block;will-change:transform}
+
+/* ---------- type ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:14px;margin:0;font:500 16px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.eyebrow::before{content:'';width:28px;height:1px;background:currentColor;flex:none}
+main{counter-reset:sec}
+.sec .eyebrow,.reel .eyebrow,.gal .eyebrow{counter-increment:sec}
+.sec .eyebrow::before,.reel .eyebrow::before,.gal .eyebrow::before{content:'(' counter(sec,decimal-leading-zero) ')';width:auto;height:auto;background:none;color:var(--g5)}
+.on-dark .eyebrow::before,.reel .eyebrow::before,.gal .eyebrow::before{color:var(--g4)}
+.h2{font-size:clamp(40px,4.6vw,84px);line-height:1;letter-spacing:-.045em;font-weight:400;margin:0}
+.h2 em{font-style:normal;color:var(--g5)}
+.on-dark .h2 em,.reel .h2 em,.gal .h2 em{color:var(--g4)}
+.lead{font-size:clamp(19px,1.3vw,23px);line-height:1.45;color:var(--g6);margin:0;max-width:36ch}
+.on-dark .lead,.gal .lead{color:var(--g4)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px clamp(32px,5vw,96px);align-items:end;margin-bottom:clamp(48px,6vw,104px)}
+.sec-head .eyebrow{grid-column:1/-1}
+
+/* ---------- buttons ---------- */
+.btn{--h:64px;position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:22px;height:var(--h);padding:0 8px 0 26px;border-radius:6px;font-weight:500;font-size:18px;letter-spacing:-.01em;white-space:nowrap;transition:background-color .3s,color .3s,border-color .3s;will-change:transform}
+.btn__ico{display:grid;place-items:center;width:48px;height:48px;border-radius:4px;font-size:22px;transition:transform .6s var(--ease-out)}
+.btn:hover .btn__ico{transform:rotate(45deg)}
+.btn--white{background:var(--white);color:var(--ink)}
+.btn--white .btn__ico{background:var(--ink);color:var(--white)}
+.btn--white:hover{background:var(--g2)}
+.btn--dark{background:var(--ink);color:var(--white)}
+.btn--dark .btn__ico{background:var(--white);color:var(--ink)}
+.btn--dark:hover{background:#2b2b2b}
+.btn--line{padding:0 26px;border:1px solid currentColor}
+.btn--line:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.on-dark .btn--line:hover,.hero .btn--line:hover,.cta .btn--line:hover,.calc__done .btn--line:hover{background:var(--white);color:var(--ink);border-color:var(--white)}
+.btn--phone{justify-content:center;gap:12px}
+.btn--phone .ico{font-size:22px}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;left:0;top:0;z-index:90;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;border:1.5px solid #fff;mix-blend-mode:difference;pointer-events:none;opacity:0;display:grid;place-items:center;transition:width .35s var(--ease-out),height .35s var(--ease-out),margin .35s var(--ease-out),opacity .3s,background-color .3s,border-color .3s}
+.cursor span{font:500 16px/1 var(--font);color:var(--ink);white-space:nowrap;opacity:0;transition:opacity .25s}
+.has-cursor .cursor{opacity:1}
+.cursor.is-link{width:72px;height:72px;margin:-36px 0 0 -36px;background:#fff}
+.cursor.is-label{width:112px;height:112px;margin:-56px 0 0 -56px;background:#fff;mix-blend-mode:normal}
+.cursor.is-label span{opacity:1}
+.cursor.is-hidden{opacity:0!important}
+@media (hover:none),(pointer:coarse){.cursor{display:none}}
+
+/* ---------- loader ---------- */
+.loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--black);color:var(--white);clip-path:inset(0 0 0 0);transition:clip-path 1.1s var(--ease);animation:loaderFail .01s 6s forwards}
+.loader.is-done{clip-path:inset(0 0 100% 0)}
+.loader__mark{display:flex;align-items:center;gap:18px}
+.loader__mark svg{width:72px;height:72px;fill:currentColor}
+.loader__mark span{font-size:clamp(34px,4vw,56px);font-weight:600;letter-spacing:-.02em}
+.loader__foot{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(28px,5vh,52px);display:flex;justify-content:space-between;align-items:flex-end;gap:24px;font:500 16px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g4)}
+.loader__num{font:300 clamp(56px,7vw,120px)/.8 var(--font);letter-spacing:-.05em;color:var(--white);font-variant-numeric:tabular-nums}
+.loader__line{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--white);transform:scaleX(0);transform-origin:left}
+@keyframes loaderFail{to{visibility:hidden;opacity:0}}
+
+/* ---------- header ---------- */
+.header{position:fixed;inset:0 0 auto;z-index:50;height:92px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:0 var(--pad);color:var(--white);transition:transform .6s var(--ease),height .4s}
+.header::before{content:'';position:absolute;inset:0;z-index:-1;background:rgba(11,11,11,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line-d);opacity:0;transition:opacity .4s}
+.header.is-solid{height:80px}
+.header.is-solid::before{opacity:1}
+.header.is-hidden{transform:translateY(-105%)}
+.logo{display:flex;align-items:center;gap:14px;flex:none}
+.logo svg{width:44px;height:44px;fill:currentColor}
+.logo__name{font-weight:700;font-size:21px;letter-spacing:.04em;line-height:1}
+.logo__name span{display:block;font-weight:400;font-size:16px;letter-spacing:.3em;opacity:.6;margin-top:5px}
+.nav{display:flex;gap:clamp(18px,2.4vw,40px)}
+.nav a{position:relative;font-size:17px;font-weight:400;padding:10px 0;white-space:nowrap}
+.nav a::after{content:'';position:absolute;left:0;right:0;bottom:4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease-out)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.header__right{display:flex;align-items:center;gap:20px}
+.header__phone{font-size:17px;white-space:nowrap;transition:opacity .4s,visibility .4s}
+.header:not(.is-solid) .header__phone{opacity:0;visibility:hidden}
+.header .btn{--h:56px;font-size:17px;padding-left:22px}
+.header .btn__ico{width:40px;height:40px;font-size:19px}
+.header__chat{display:flex;gap:8px}
+.chat-btn{display:grid;place-items:center;width:56px;height:56px;border-radius:6px;border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.06);backdrop-filter:blur(10px);font-size:25px;transition:background-color .3s,border-color .3s,color .3s}
+.chat-btn:hover{background:var(--white);border-color:var(--white);color:var(--ink)}
+.burger{display:none;position:relative;width:56px;height:56px;border-radius:6px;border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.06);backdrop-filter:blur(10px)}
+.burger i{position:absolute;left:17px;right:17px;height:2px;background:currentColor;transition:transform .5s var(--ease),top .5s var(--ease)}
+.burger i:first-child{top:23px}.burger i:last-child{top:31px}
+.menu-open .burger i:first-child{top:27px;transform:rotate(45deg)}
+.menu-open .burger i:last-child{top:27px;transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:45;background:var(--black);color:var(--white);padding:130px var(--pad) 40px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .8s var(--ease),visibility 0s .8s}
+.menu-open .menu{clip-path:inset(0);visibility:visible;transition:clip-path .8s var(--ease)}
+.menu nav{display:flex;flex-direction:column}
+.menu nav a{font-size:clamp(40px,10vw,72px);font-weight:400;letter-spacing:-.045em;line-height:1.15;display:flex;align-items:baseline;gap:18px}
+.menu nav a span{font:500 16px var(--mono);color:var(--g4)}
+.menu__foot{display:flex;flex-direction:column;gap:18px;font-size:22px}
+.menu__chat{display:flex;gap:12px;flex-wrap:wrap}
+.menu__chat a{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 22px;border-radius:6px;border:1px solid var(--line-d);font-size:18px}
+.menu__chat .ico{font-size:24px}
+
+/* ---------- hero: terminal at golden hour, our man on the quay ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;background:var(--black);color:var(--white);overflow:hidden}
+.hero__media{position:absolute;inset:0;margin:0;overflow:hidden;background:var(--char)}
+.hero__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;transform-origin:72% 42%}
+@media (max-aspect-ratio:4/5){.hero__media img{object-position:84% 40%}}
+.hero__shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(180deg,rgba(11,11,11,.6) 0,rgba(11,11,11,0) 20%),
+  linear-gradient(90deg,rgba(11,11,11,.86) 0,rgba(11,11,11,.66) 30%,rgba(11,11,11,.34) 48%,rgba(11,11,11,0) 62%),
+  linear-gradient(0deg,#0b0b0b 0,rgba(11,11,11,.6) 20%,rgba(11,11,11,0) 44%)}
+.hero__content{position:absolute;z-index:2;left:var(--pad);bottom:clamp(116px,15vh,160px);width:min(880px,58%);display:grid;gap:28px;pointer-events:none}
+.hero__content > *{pointer-events:auto}
+.hero__title{font-size:clamp(50px,min(7.2vw,12.5vh),150px);line-height:.92;letter-spacing:-.055em;font-weight:400;margin:22px 0 0}
+.hero__title .dim{color:var(--g4)}
+.hero__lead{font-size:clamp(18px,1.25vw,22px);line-height:1.5;color:#cfcfca;margin:0 0 28px;max-width:34ch}
+.hero__actions{display:flex;flex-wrap:wrap;gap:10px}
+.hero__bar{position:absolute;z-index:2;left:var(--pad);right:var(--pad);bottom:0;height:clamp(80px,9.5vh,100px);display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid var(--line-d)}
+.facts{list-style:none;margin:0;padding:0;display:flex;gap:clamp(24px,4vw,72px)}
+.facts li{display:flex;align-items:baseline;gap:12px;font-size:17px;color:var(--g4);white-space:nowrap}
+.facts b{font-size:clamp(22px,1.6vw,28px);font-weight:400;letter-spacing:-.03em;color:var(--white)}
+.scroll-cue{display:flex;align-items:center;gap:14px;font:500 16px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--g4)}
+.scroll-cue i{position:relative;width:40px;height:1px;background:var(--line-d);overflow:hidden}
+.scroll-cue i::after{content:'';position:absolute;inset:0;background:var(--white);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* ---------- marquee ---------- */
+.marquee{background:var(--black);color:var(--white);padding:clamp(28px,3.6vw,56px) 0;overflow:hidden;border-bottom:1px solid var(--line-d)}
+.marquee__track{display:flex;width:max-content;will-change:transform}
+.marquee__item{display:flex;align-items:center;gap:clamp(26px,3vw,52px);padding-right:clamp(26px,3vw,52px);font-size:clamp(40px,5vw,88px);font-weight:300;letter-spacing:-.045em;line-height:1.1;white-space:nowrap}
+.marquee__item:nth-child(even) span{color:var(--g5)}
+.marquee__item svg{width:.5em;height:.5em;fill:var(--g5);flex:none}
+
+/* ---------- reel: services on real footage ---------- */
+.reel{position:relative;background:var(--black);color:var(--white)}
+.reel__stage{position:relative;padding:clamp(96px,11vw,170px) var(--pad)}
+.reel__copy{max-width:1600px;margin-inline:auto}
+.reel__copy .h2{margin:22px 0 clamp(40px,5vw,72px);max-width:14ch}
+.reel__steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 20px}
+.reel__steps li{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:12px;align-content:start;padding-top:18px;border-top:1px solid var(--line-d)}
+.reel__n{font:500 16px/1.75 var(--mono);color:var(--g4)}
+.reel__steps h3{margin:0;font-size:clamp(20px,1.5vw,24px);font-weight:400;letter-spacing:-.02em;line-height:1.3}
+.reel__steps p{margin:8px 0 0;font-size:17px;line-height:1.45;color:var(--g4)}
+.reel__media{grid-column:1/-1;position:relative;margin:20px 0 0;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);background:var(--char)}
+.reel__media video,.reel__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel__frame,.reel__bar{display:none}
+/* media sit in the list items but are placed against the stage, so the copy column must stay unpositioned and untransformed */
+.reel.is-pinned .reel__stage{--cw:min(600px,38vw);--fw:min(calc((100svh - 190px) * .82),50vw);height:100vh;height:100svh;padding:0 var(--pad);overflow:hidden;display:flex;align-items:center}
+.reel.is-pinned .reel__copy{flex:none;width:var(--cw);margin:0}
+.reel.is-pinned .reel__copy .h2{font-size:clamp(36px,min(4vw,7.4vh),72px);margin:20px 0 28px}
+.reel.is-pinned .reel__steps{display:block}
+.reel.is-pinned .reel__steps li{padding:14px 0;color:var(--g5);transition:color .4s}
+.reel.is-pinned .reel__steps p{max-height:0;opacity:0;overflow:hidden;margin:0;transition:max-height .5s var(--ease-out),opacity .4s,margin .4s}
+.reel.is-pinned .reel__steps .is-done{color:var(--g3)}
+.reel.is-pinned .reel__steps .is-on,.reel.is-pinned .reel__steps .is-on .reel__n{color:var(--white)}
+.reel.is-pinned .reel__steps .is-on p{max-height:4.6em;opacity:1;margin-top:6px}
+.reel.is-pinned .reel__media,.reel.is-pinned .reel__frame{position:absolute;top:108px;bottom:76px;width:var(--fw);left:calc(var(--pad) + var(--cw) + (100% - 2 * var(--pad) - var(--cw) - var(--fw)) / 2);margin:0;aspect-ratio:auto}
+.reel.is-pinned .reel__media{z-index:0;clip-path:inset(100% 0 0 0);transition:clip-path 1.1s var(--ease)}
+.reel.is-pinned .reel__media.is-prev{z-index:1;clip-path:inset(0 0 0 0)}
+.reel.is-pinned .reel__media.is-on{z-index:2;clip-path:inset(0 0 0 0)}
+.reel.is-pinned .reel__media > *{transform:scale(1.18);transition:transform 1.6s var(--ease-out)}
+.reel.is-pinned .reel__media.is-on > *{transform:scale(1)}
+.reel.is-pinned .reel__frame{display:block;z-index:3;pointer-events:none;border-radius:var(--r);background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.6))}
+.reel__hud{position:absolute;left:24px;right:24px;bottom:22px;display:flex;justify-content:space-between;gap:16px;font:500 16px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.reel__hud b{font-weight:500}
+.crop{position:absolute;width:22px;height:22px;border:0 solid var(--white)}
+.crop--tl{left:16px;top:16px;border-left-width:2px;border-top-width:2px}
+.crop--tr{right:16px;top:16px;border-right-width:2px;border-top-width:2px}
+.crop--bl{left:16px;bottom:16px;border-left-width:2px;border-bottom-width:2px;display:none}
+.crop--br{right:16px;bottom:16px;border-right-width:2px;border-bottom-width:2px;display:none}
+.reel.is-pinned .reel__bar{display:block;position:absolute;left:var(--pad);right:var(--pad);bottom:34px;height:2px;background:var(--line-d);overflow:hidden}
+.reel__bar i{position:absolute;inset:0;background:var(--white);transform:scaleX(0);transform-origin:left}
+
+/* ---------- stats ---------- */
+.stats{background:var(--paper)}
+.figs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:40px clamp(16px,2vw,32px)}
+.fig{min-width:0;padding-top:24px;border-top:1px solid var(--ink)}
+.fig__num{display:block;font-size:clamp(40px,3.9vw,80px);font-weight:300;letter-spacing:-.06em;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fig__num small{font-size:.42em;letter-spacing:-.02em;margin-left:6px;font-weight:400}
+.fig p{font-size:17px;line-height:1.4;color:var(--g6);margin:16px 0 0;max-width:22ch}
+.band{position:relative;margin:clamp(64px,8vw,128px) 0 0;height:clamp(380px,64vh,740px);overflow:hidden;border-radius:var(--r);background:var(--char)}
+.band img{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover}
+.band::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.6))}
+.band figcaption{position:absolute;z-index:1;left:clamp(20px,2.4vw,36px);right:clamp(20px,2.4vw,36px);bottom:clamp(18px,2.2vw,30px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--white);font:500 16px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.stats__note{display:flex;justify-content:space-between;align-items:center;gap:24px 32px;flex-wrap:wrap;margin-top:clamp(40px,5vw,72px);font-size:19px;color:var(--g6)}
+.stats__note strong{color:var(--ink);font-weight:500}
+
+/* ---------- directions ---------- */
+.dirs{background:var(--paper);padding-top:0}
+.dirs__panels{display:flex;gap:12px;height:clamp(540px,74vh,780px)}
+.dir{position:relative;flex:1 1 0;min-width:0;border-radius:var(--r);overflow:hidden;color:var(--white);background:var(--char);transition:flex-grow 1s var(--ease);cursor:pointer;isolation:isolate;outline-offset:6px}
+.dir.is-active{flex-grow:3;cursor:default}
+.dir img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.14);filter:brightness(.55);transition:transform 1.4s var(--ease),filter 1s}
+.dir.is-active img{transform:scale(1.02);filter:brightness(.9)}
+.dir::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,.4),rgba(0,0,0,.05) 35%,rgba(0,0,0,.86))}
+.dir__num{position:absolute;top:30px;left:32px;font:500 16px/1 var(--mono);letter-spacing:.06em;color:var(--g3)}
+.dir__tag{position:absolute;top:22px;right:24px;padding:9px 14px;border-radius:4px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.25);backdrop-filter:blur(10px);font:500 16px/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;opacity:0;transition:opacity .5s}
+.dir.is-active .dir__tag{opacity:1;transition-delay:.4s}
+.dir__vt{position:absolute;left:28px;bottom:32px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:clamp(28px,2.4vw,40px);font-weight:400;letter-spacing:-.03em;line-height:1;white-space:nowrap;transition:opacity .4s}
+.dir.is-active .dir__vt{opacity:0}
+.dir__body{position:absolute;left:clamp(24px,3vw,48px);right:clamp(24px,3vw,48px);bottom:clamp(24px,3vw,44px);opacity:0;transform:translateY(24px);transition:opacity .4s,transform .6s var(--ease-out);pointer-events:none}
+.dir.is-active .dir__body{opacity:1;transform:none;transition-delay:.35s;pointer-events:auto}
+.dir h3{font-size:clamp(30px,2.9vw,50px);line-height:1.02;letter-spacing:-.04em;margin:0;font-weight:400;max-width:13ch}
+.dir p{font-size:clamp(18px,1.25vw,21px);line-height:1.45;color:#d6d6d1;max-width:40ch;margin:18px 0 28px}
+
+/* ---------- services ---------- */
+.svc{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-d)}
+.services .wrap{position:relative}
+.svc__peek{position:absolute;left:0;top:0;z-index:3;width:clamp(260px,22vw,360px);aspect-ratio:4/5;margin:0;border-radius:var(--r);overflow:hidden;pointer-events:none;clip-path:inset(50% 50% 50% 50%);transition:clip-path .7s var(--ease);box-shadow:0 40px 80px -30px rgba(0,0,0,.7);will-change:transform}
+.svc__peek img{width:100%;height:100%;object-fit:cover;transform:scale(1.25);transition:transform 1.2s var(--ease-out)}
+.svc__peek.is-on{clip-path:inset(0 0 0 0)}
+.svc__peek.is-on img{transform:scale(1)}
+.svc__row{position:relative;display:grid;grid-template-columns:88px minmax(0,1.3fr) minmax(0,1fr) 76px;align-items:center;gap:clamp(18px,2.4vw,40px);width:100%;padding:clamp(26px,2.6vw,42px) 0;border-bottom:1px solid var(--line-d);text-align:left;isolation:isolate;transition:color .4s}
+.svc__row::before{content:'';position:absolute;inset:0 calc(-1 * var(--pad));background:var(--white);transform:scaleY(0);transform-origin:50% 100%;transition:transform .6s var(--ease);z-index:-1}
+.svc__row:hover::before,.svc__row:focus-visible::before{transform:scaleY(1)}
+.svc__row:hover,.svc__row:focus-visible{color:var(--ink);outline:none}
+.svc__num{font:500 16px/1 var(--mono);color:var(--g4);transition:color .4s}
+.svc__title{font-size:clamp(26px,2.7vw,46px);font-weight:400;letter-spacing:-.035em;line-height:1;transition:transform .6s var(--ease-out)}
+.svc__desc{font-size:18px;line-height:1.45;color:var(--g4);transition:color .4s}
+.svc__go{display:grid;place-items:center;width:76px;height:76px;border-radius:6px;border:1px solid var(--line-d);font-size:32px;transition:background-color .4s,color .4s,transform .6s var(--ease-out),border-color .4s}
+.svc__go .ico{stroke-width:1.4}
+.svc__row:hover .svc__num,.svc__row:hover .svc__desc,.svc__row:focus-visible .svc__num,.svc__row:focus-visible .svc__desc{color:var(--g6)}
+.svc__row:hover .svc__title,.svc__row:focus-visible .svc__title{transform:translateX(18px)}
+.svc__row:hover .svc__go,.svc__row:focus-visible .svc__go{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+/* ---------- philosophy ---------- */
+.philo{background:var(--paper)}
+.philo__text{font-size:clamp(30px,3.7vw,64px);line-height:1.12;letter-spacing:-.035em;font-weight:400;margin:32px 0 clamp(64px,8vw,128px);max-width:22ch}
+.philo__text em{font-style:normal;color:var(--g5)}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(280px,auto);gap:12px}
+.bcard{position:relative;overflow:hidden;border-radius:var(--r);padding:clamp(28px,2.6vw,42px);background:var(--paper-2);display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.bcard h3{font-size:clamp(24px,1.9vw,32px);line-height:1.12;letter-spacing:-.03em;margin:0;font-weight:400}
+.bcard p{font-size:18px;line-height:1.5;color:var(--g6);margin:12px 0 0}
+.bcard__ico{display:grid;place-items:center;width:64px;height:64px;border-radius:6px;background:var(--ink);color:var(--white);font-size:32px}
+.bcard--ant{grid-column:span 2;grid-row:span 2;background:var(--black);color:var(--white);justify-content:flex-end}
+.bcard--ant p{color:var(--g4);font-size:clamp(18px,1.3vw,22px);max-width:40ch}
+.bcard--ant h3{font-size:clamp(36px,3.4vw,60px)}
+.bcard--ant h3 em{font-style:normal;color:var(--g4)}
+.bcard--ant .ant-photo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:78% 30%;transform:scale(1.04);transition:transform 1.6s var(--ease-out)}
+.bcard--ant:hover .ant-photo{transform:scale(1)}
+.bcard--ant::after{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(25deg,rgba(0,0,0,.88) 0,rgba(0,0,0,.5) 42%,rgba(0,0,0,0) 72%)}
+.bcard--ant > div{position:relative;z-index:1;max-width:min(620px,62%)}
+.bcard--ant p{color:#cfcfca}
+.bcard--photo{background:var(--black);color:var(--white)}
+.bcard--photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(.55)}
+.bcard--photo > :not(img){position:relative;z-index:1}
+.bcard--photo p{color:#d6d6d1}
+.bcard__big{font-size:clamp(60px,5.4vw,96px);font-weight:300;letter-spacing:-.06em;line-height:.9}
+
+/* ---------- team ---------- */
+.team{background:var(--paper);padding-top:0}
+.team__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,96px);align-items:end}
+.team__copy .h2{margin:22px 0 28px;max-width:12ch}
+.team__contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.team__photos{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:12px;align-items:end}
+.team__side{display:grid;gap:12px}
+.team__ph{margin:0}
+.team__img{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r);background:var(--paper-2)}
+.team__side .team__img{aspect-ratio:1/1}
+.team__img img{position:absolute;left:0;top:-6%;width:100%;height:112%;object-fit:cover}
+.team__ph figcaption{display:flex;gap:12px;padding-top:12px;font-size:17px;line-height:1.35;color:var(--g6)}
+.team__ph figcaption span{font:500 16px/1.45 var(--mono);color:var(--g5)}
+
+/* ---------- gallery: frames from the sites ---------- */
+.gal{background:var(--black);color:var(--white);padding:clamp(96px,11vw,170px) 0}
+.gal__head{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px clamp(32px,5vw,96px);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
+.gal__head .eyebrow{grid-column:1/-1}
+.gal__count{display:block;margin-top:20px;font:500 16px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g4)}
+.gal__count b{font-weight:500;color:var(--white)}
+.gal__track{--gh:min(58vh,600px);display:flex;gap:clamp(14px,1.4vw,24px);padding:0 var(--pad);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gal__track::-webkit-scrollbar{display:none}
+.gal__item{flex:none;width:calc(var(--gh) * var(--a));margin:0;scroll-snap-align:start}
+.gal__media{position:relative;height:var(--gh);overflow:hidden;border-radius:var(--r);background:var(--char)}
+.gal__media img,.gal__media video{position:absolute;top:0;left:-6%;width:112%;max-width:none;height:100%;object-fit:cover}
+.gal__item figcaption{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 14px;padding-top:16px;font-size:17px;line-height:1.35;color:var(--g4)}
+.gal__item figcaption span{grid-row:1/3;font:500 16px/1.45 var(--mono);color:var(--g4)}
+.gal__item figcaption b{font-weight:500;color:var(--white)}
+.gal.is-pinned{padding:0}
+.gal.is-pinned .gal__stage{height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:72px}
+.gal.is-pinned .gal__head{margin-bottom:clamp(24px,4vh,48px)}
+.gal.is-pinned .gal__track{--gh:min(54vh,600px);width:max-content;overflow:visible;scroll-snap-type:none;will-change:transform}
+
+/* ---------- strategy ---------- */
+.strategy{background:var(--paper);padding-bottom:clamp(24px,3vw,48px)}
+.scards::after{content:'';display:block;height:calc(3 * 84px)}
+.scard{--bg:var(--paper-2);position:sticky;top:calc(96px + var(--i) * 84px);min-height:min(68vh,640px);margin-bottom:clamp(18px,3vh,36px);border-radius:var(--r);padding:20px clamp(28px,4vw,64px) clamp(30px,4vw,60px);display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 1fr;column-gap:clamp(24px,4vw,80px);background:var(--bg);transform-origin:50% 0;overflow:hidden;will-change:transform}
+.scard__head{grid-column:1/-1;display:flex;align-items:center;gap:clamp(18px,2vw,32px);min-height:64px;border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent)}
+.scard__num{font:500 16px/1 var(--mono);opacity:.7}
+.scard h3{margin:0;font-size:clamp(34px,3.4vw,56px);line-height:1;letter-spacing:-.04em;font-weight:400}
+.scard p{grid-column:1;align-self:end;margin:0;font-size:clamp(28px,3vw,54px);line-height:1.1;letter-spacing:-.035em;font-weight:300;max-width:17ch}
+.scard__art{grid-column:2;grid-row:2;align-self:center;width:clamp(180px,25vw,400px);margin:28px 0 0}
+.scard__art svg{display:block;width:100%;height:auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.scard__art .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease-out)}
+.scard__art .d2{transition-delay:.35s}
+.scard__art .d3{transition-delay:.8s;stroke-width:3}
+.scard__art .dash{stroke-dasharray:.02 .03;stroke-dashoffset:0;opacity:0;transition:opacity 1s .9s}
+.scard__art .fade{opacity:0;transition:opacity 1s .6s}
+.scard__art .node{fill:var(--bg);opacity:0;transition:opacity .6s .7s}
+.scard__art .runner{opacity:0;transition:opacity .6s 1.2s;stroke:none}
+.scard__art .hand{transform-origin:100px 100px;stroke-width:3}
+.scard__art .hand--m{animation:spin 8s linear infinite paused}
+.scard__art .hand--h{animation:spin 96s linear infinite paused}
+.scard__art .ring{stroke-dasharray:4 10;opacity:.4;transform-origin:100px 106px;animation:spin 40s linear infinite paused}
+.scard.is-in .draw{stroke-dashoffset:0}
+.scard.is-in .dash,.scard.is-in .fade,.scard.is-in .node,.scard.is-in .runner{opacity:1}
+.scard.is-in .hand,.scard.is-in .ring{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scard--1{--bg:var(--paper-2);color:var(--ink)}
+.scard--2{--bg:var(--black);color:var(--white)}
+.scard--3{--bg:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.scard--4{--bg:var(--char-2);color:var(--white)}
+
+/* ---------- calculator ---------- */
+.calc{background:var(--paper-2)}
+.calc__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,80px);align-items:start}
+.calc__visual{position:sticky;top:112px;height:min(calc(100vh - 140px),920px);border-radius:var(--r);overflow:hidden;background:var(--char);color:var(--white)}
+.calc__media{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .8s}
+.calc__media.is-on{opacity:1}
+.calc__media video,.calc__media img{width:100%;height:100%;object-fit:cover}
+.calc__visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent 25%,transparent 55%,rgba(0,0,0,.7));pointer-events:none}
+.calc__top{position:absolute;z-index:1;left:26px;right:26px;top:24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.calc__chip{padding:9px 14px;border-radius:4px;background:var(--white);color:var(--ink);font:500 16px/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.calc__hint{font:500 16px/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;color:#d6d6d1}
+.calc__cap{position:absolute;z-index:1;left:26px;right:26px;bottom:24px;padding:18px 0 0;border-top:1px solid rgba(255,255,255,.3)}
+.calc__cap span{display:block;font:500 16px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g3)}
+.calc__cap strong{display:block;font-size:clamp(21px,1.6vw,27px);font-weight:400;letter-spacing:-.02em;line-height:1.25;margin-top:8px}
+.calc__form .h2{font-size:clamp(42px,4.8vw,84px);margin:22px 0 clamp(32px,4vw,52px)}
+.calc fieldset{border:0;margin:0 0 30px;padding:0;min-width:0}
+.calc legend,.fl{display:block;padding:0;margin-bottom:14px;font:500 16px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g6)}
+.seg{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:8px;background:var(--paper);border:1px solid var(--line)}
+.seg input,.chip input{position:absolute;opacity:0;pointer-events:none}
+.seg label{display:flex;align-items:center;justify-content:center;gap:10px;height:60px;border-radius:5px;font-size:18px;cursor:pointer;transition:background-color .3s,color .3s}
+.seg label .ico{font-size:24px}
+.seg input:checked+label{background:var(--ink);color:var(--white)}
+.seg input:focus-visible+label{outline:2px solid var(--ink);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip span{display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:10px 20px;border-radius:6px;border:1px solid var(--line);background:var(--paper);font-size:17px;cursor:pointer;transition:background-color .25s,border-color .25s,color .25s}
+.chip span::before{content:'+';font-size:20px;line-height:1;transition:transform .3s}
+.chip span:hover{border-color:var(--ink)}
+.chip input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.chip input:checked+span::before{transform:rotate(45deg)}
+.chip input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:block;margin-bottom:18px}
+.field input,.field textarea{display:block;width:100%;height:64px;padding:0 20px;border-radius:6px;border:1px solid var(--line);background:var(--paper);font-size:19px;transition:border-color .2s,box-shadow .2s}
+.field textarea{height:auto;min-height:128px;padding:18px 20px;resize:vertical;line-height:1.45}
+.field input::placeholder,.field textarea::placeholder{color:#8b8b87}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px rgba(17,17,17,.1)}
+.field.is-error input{border-color:#b42318;box-shadow:0 0 0 4px rgba(180,35,24,.12)}
+.field__err{display:none;font-size:16px;color:#b42318;margin-top:8px}
+.field.is-error .field__err{display:block}
+.range{margin-bottom:30px}
+.range__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.range output{font-size:clamp(32px,2.8vw,48px);font-weight:300;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.range input{-webkit-appearance:none;appearance:none;width:100%;height:4px;margin:26px 0 14px;border-radius:2px;background:linear-gradient(90deg,var(--ink) var(--p,10%),rgba(17,17,17,.16) var(--p,10%));cursor:pointer}
+.range input::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--white);border:7px solid var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.range input::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--white);border:7px solid var(--ink)}
+.range__scale{display:flex;justify-content:space-between;font-size:16px;color:var(--g6)}
+.calc__submit{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:10px}
+.calc__submit p{margin:0;font-size:16px;color:var(--g6);max-width:30ch}
+.calc__done{margin-top:28px;border-radius:var(--r);background:var(--black);color:var(--white);padding:clamp(26px,3vw,40px)}
+.calc__done[hidden]{display:none}
+.calc__done h3{font-size:clamp(28px,2.4vw,40px);font-weight:400;letter-spacing:-.035em;margin:0 0 12px;line-height:1.05}
+.calc__done pre{white-space:pre-wrap;font:500 17px/1.6 var(--mono);color:#cfcfca;margin:0 0 24px;padding:20px;border-radius:6px;background:rgba(255,255,255,.06)}
+.calc__done .btns{display:flex;gap:10px;flex-wrap:wrap}
+.calc__done .btn--line{border-color:rgba(255,255,255,.4)}
+.flash{animation:flash 1.4s var(--ease)}
+@keyframes flash{0%,100%{box-shadow:0 0 0 0 rgba(17,17,17,0)}30%{box-shadow:0 0 0 8px rgba(17,17,17,.25)}}
+
+/* ---------- cta ---------- */
+.cta{position:relative;overflow:hidden;background:var(--black);color:var(--white);padding:clamp(96px,11vw,180px) 0}
+.cta h2{font-size:clamp(52px,7.6vw,140px);line-height:.94;letter-spacing:-.055em;font-weight:400;margin:26px 0 0}
+.cta h2 .dim{color:var(--g5)}
+.cta__row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(40px,5vw,72px)}
+.cta__phone{font-size:clamp(28px,2.8vw,48px);font-weight:400;letter-spacing:-.035em;line-height:1}
+.cta__phone small{display:block;font:500 16px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g4);margin-bottom:14px}
+.cta__btn{display:grid;place-items:center;width:clamp(170px,15vw,240px);aspect-ratio:1;border-radius:50%;background:var(--white);color:var(--ink);text-align:center;font-weight:500;font-size:20px;line-height:1.2;transition:background-color .4s}
+.cta__btn:hover{background:var(--g2)}
+.cta__btn .ico{font-size:40px;margin:0 auto 8px}
+.cta__deco{position:absolute;right:-6vw;top:-10vw;width:46vw;max-width:760px;fill:rgba(255,255,255,.035);pointer-events:none}
+
+/* ---------- footer ---------- */
+.footer{background:var(--black);color:var(--white);padding:clamp(70px,8vw,120px) 0 30px;overflow:hidden;border-top:1px solid var(--line-d)}
+.footer__grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+.footer h4{font:500 16px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--g4);margin:0 0 22px}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.footer a,.footer li{font-size:19px}
+.footer a:hover{color:var(--g3)}
+.footer__about p{font-size:19px;color:var(--g4);max-width:32ch;margin:22px 0 0}
+.footer__word{font-size:clamp(84px,21.5vw,400px);font-weight:600;letter-spacing:-.065em;line-height:.8;margin:clamp(70px,8vw,130px) 0 26px;background:linear-gradient(180deg,#3a3a3a 20%,rgba(58,58,58,0));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;user-select:none}
+.footer__bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line-d);font-size:16px;color:var(--g4)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .nav,.header__phone{display:none}
+  .burger{display:block}
+  .figs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .svc__row{grid-template-columns:70px minmax(0,1fr) 68px}
+  .svc__desc{grid-column:2;grid-row:2}
+  .svc__go{grid-column:3;grid-row:1/3;width:68px;height:68px}
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .facts li:nth-child(3){display:none}
+}
+@media (max-width:980px){
+  .hero__shade{background:linear-gradient(180deg,rgba(11,11,11,.6) 0,rgba(11,11,11,0) 18%),linear-gradient(0deg,#0b0b0b 0,rgba(11,11,11,.8) 30%,rgba(11,11,11,0) 58%)}
+  .hero__content{width:auto;right:var(--pad);gap:22px}
+  .hero__lead{margin-bottom:22px}
+  .scroll-cue{display:none}
+  .sec-head,.gal__head,.team__grid{grid-template-columns:1fr}
+  .reel__steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .calc__grid{grid-template-columns:1fr}
+  .calc__visual{position:relative;top:0;height:auto;aspect-ratio:4/3}
+  .scard{grid-template-columns:1fr;grid-template-rows:auto 1fr auto}
+  .scard__art{grid-column:1;grid-row:2;justify-self:center;align-self:center;width:clamp(160px,44vw,260px)}
+  .scard p{grid-row:3}
+}
+@media (max-width:760px){
+  .header{height:76px}
+  .header.is-solid{height:72px}
+  .header .btn,.header__chat{display:none}
+  .logo svg{width:38px;height:38px}
+  .logo__name{font-size:19px}
+  .hero{min-height:600px}
+  .hero__content{bottom:24px}
+  .hero__title{font-size:clamp(44px,12.4vw,64px);margin-top:16px}
+  .hero__lead{font-size:17px}
+  .hero__actions .btn--line{display:none}
+  .hero__actions .btn{--h:60px;font-size:17px}
+  .hero__bar{display:none}
+  .reel__steps{grid-template-columns:1fr;gap:40px}
+  .figs{grid-template-columns:1fr;gap:28px}
+  .fig{padding-top:18px}
+  .fig__num{font-size:clamp(48px,14vw,64px)}
+  .fig p{margin-top:10px}
+  .band{height:min(110vw,480px)}
+  .band figcaption{flex-direction:column;gap:6px}
+  .dirs__panels{flex-direction:column;height:auto}
+  .dir{flex:none;min-height:480px;cursor:default}
+  .dir img{transform:none;filter:brightness(.8)}
+  .dir__vt{display:none}
+  .dir__body,.dir__tag{opacity:1;transform:none;pointer-events:auto}
+  .svc__row{grid-template-columns:minmax(0,1fr) 58px;gap:12px 16px}
+  .svc__num{grid-column:1;grid-row:1}
+  .svc__title{grid-column:1;grid-row:2}
+  .svc__desc{grid-column:1;grid-row:3}
+  .svc__go{grid-column:2;grid-row:1/4;width:58px;height:58px;font-size:26px}
+  .bento{grid-template-columns:1fr}
+  .bcard--ant{grid-column:auto;grid-row:auto;min-height:600px}
+  .bcard--ant > div{max-width:none}
+  .team__photos{grid-template-columns:1fr 1fr}
+  .team__ph--main{grid-column:1/-1}
+  .team__ph--main .team__img{aspect-ratio:4/5}
+  .team__side{display:contents}
+  .gal__track{--gh:min(118vw,470px)}
+  .gal__item{max-width:84vw}
+  .scards::after{height:calc(3 * 64px)}
+  .scard{min-height:72vh;top:calc(88px + var(--i) * 64px);padding-top:12px}
+  .scard__head{min-height:52px}
+  .scard h3{font-size:clamp(28px,8vw,40px)}
+  .scard p{font-size:clamp(24px,7vw,34px)}
+  .row2{grid-template-columns:1fr;gap:0}
+  .seg label{height:56px;font-size:17px}
+  .seg label .ico{display:none}
+  .calc__visual{aspect-ratio:1/1}
+  .calc__top{left:18px;right:18px;top:18px}
+  .calc__hint{display:none}
+  .calc__cap{left:18px;right:18px;bottom:18px}
+  .cta__btn{width:150px;font-size:18px}
+  .footer__grid{grid-template-columns:1fr}
+}
+@media (min-width:981px) and (max-height:820px){
+  .reel.is-pinned .reel__steps li{padding:10px 0}
+  .reel.is-pinned .reel__copy .h2{margin:16px 0 20px}
+  .gal.is-pinned .gal__track{--gh:min(50vh,600px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .loader{display:none}
+  .scard__art .draw{stroke-dashoffset:0}
+  .scard__art .dash,.scard__art .fade,.scard__art .node,.scard__art .runner{opacity:1}
+}
+</style>
+<noscript><style>.loader{display:none}</style></noscript>
+</head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+  <symbol id="i-mark" viewBox="0 0 64 64"><path fill-rule="evenodd" d="M2 41C2 32 12 27 24 26.5C36 26 46.5 32.5 53.2 42.2Q54.2 43.7 52.8 44.9C46 52 35 57.5 23 57.5C10 57.5 2 50 2 41ZM21.6 37C21.6 33.8 24.5 32 28.8 32C33.5 32 37 35.5 39 40.7C35.5 42 32 42.2 28.8 42.2C24.5 42.2 21.6 40.3 21.6 37Z"/><path d="M14 29.5L32.7 9.1C33.3 8.4 34.1 8.8 35.4 8.8L57.8 8.3A4.2 4.2 0 0 1 57.8 16.7L37.5 12.4Q35.8 12.1 35 12.6L16.6 31.5Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 32 32"><path d="M9 23L23 9M12 9h11v11"/></symbol>
+  <symbol id="i-crane" viewBox="0 0 32 32"><path d="M7 29V6l19-2v3M4 8h24M24 7v7M20 14h8v5h-8zM3 29h26M7 13l5-6M7 19l5-6M12 29V19"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 32 32"><path d="M4 19h24l-3.5 7h-17zM8 19v-5h7v5M15 19V9h5v10M20 12h5v7M3 29c2 0 2.5-1 4.3-1S10 29 12 29s2.6-1 4.3-1 2.6 1 4.3 1 2.6-1 4.3-1 2.4 1 4.1 1"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 32 32"><path d="M3 8h16v14H3zM19 13h6l4 5v4H19"/><circle cx="8.5" cy="23.5" r="2.5"/><circle cx="23.5" cy="23.5" r="2.5"/></symbol>
+  <symbol id="i-train" viewBox="0 0 32 32"><rect x="7" y="3" width="18" height="20" rx="4"/><path d="M7 13h18M12 23l-3 6M20 23l3 6M10 28h12"/><circle cx="12" cy="18" r="1.2"/><circle cx="20" cy="18" r="1.2"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 32 32"><path d="M9 10h14l3 18H6zM12 10V7a4 4 0 0 1 8 0v3M9.5 17h13M8.5 23h15"/></symbol>
+  <symbol id="i-hook" viewBox="0 0 32 32"><path d="M16 3v8M11 11h10v5H11zM16 16v6a4 4 0 1 1-4 4M5 29h22"/></symbol>
+  <symbol id="i-warehouse" viewBox="0 0 32 32"><path d="M3 13L16 5l13 8v15H3zM8 28V17h16v11M8 21h16M8 25h16"/></symbol>
+  <symbol id="i-route" viewBox="0 0 32 32"><circle cx="8" cy="7" r="3"/><circle cx="24" cy="25" r="3"/><path d="M11 7h9a4.5 4.5 0 0 1 0 9h-8a4.5 4.5 0 0 0 0 9h9"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 32 32"><path d="M7 3h12l6 6v20H7zM19 3v6h6M11 14h10M11 18h10M11 22h4"/><path d="M18 24l2.5 2.5L25 21"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 32 32"><path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z"/><path d="M11 16l3.5 3.5L21 13"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 32 32"><path d="M16 3v6M16 23v6M3 16h6M23 16h6M7 7l4 4M21 21l4 4M25 7l-4 4M11 21l-4 4"/><circle cx="16" cy="16" r="3"/></symbol>
+  <symbol id="i-support" viewBox="0 0 32 32"><path d="M6 18v-3a10 10 0 0 1 20 0v3"/><rect x="4" y="18" width="5" height="8" rx="2"/><rect x="23" y="18" width="5" height="8" rx="2"/><path d="M25.5 26c0 2-3 3-7 3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 32 32"><path d="M8 4h5l2 6-3 2a16 16 0 0 0 8 8l2-3 6 2v5a3 3 0 0 1-3 3C14 27 5 18 5 7a3 3 0 0 1 3-3z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 32 32"><path d="M5 27l1.7-5.2A11.5 11.5 0 1 1 10.4 25.5z"/><path d="M12.2 11.2c.2 4.6 4 8.4 8.6 8.6l1.6-2.1-2.7-1.4-1.2 1.1a7.2 7.2 0 0 1-3.9-3.9l1.1-1.2-1.4-2.7z"/></symbol>
+  <symbol id="i-vb" viewBox="0 0 32 32"><path d="M9 4h14a5 5 0 0 1 5 5v9a5 5 0 0 1-5 5h-7l-6 5v-5H9a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z"/><path d="M12.4 9.6c.3 4 3.6 7.3 7.6 7.6l1.4-1.8-2.4-1.3-1.1 1a5.8 5.8 0 0 1-3-3l1-1.1-1.3-2.4z"/></symbol>
+</defs></svg>
+
+<div class="cursor" aria-hidden="true"><span></span></div>
+<div class="loader" aria-hidden="true">
+  <div class="loader__mark"><svg><use href="#i-mark"/></svg><span>FORMICA</span></div>
+  <div class="loader__foot"><span>Від причалу до кінцевої точки</span><span class="loader__num">00</span></div>
+  <i class="loader__line"></i>
+</div>
+
+<header class="header" id="header">
+  <a class="logo" href="#top" aria-label="Formica Logistics — на головну"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="logo__name">FORMICA<span>LOGISTICS</span></span></a>
+  <nav class="nav" aria-label="Основна навігація">
+    <a href="#directions">Напрямки</a><a href="#services">Послуги</a><a href="#gallery">Об’єкти</a><a href="#about">Про нас</a><a href="#contacts">Контакти</a>
+  </nav>
+  <div class="header__right">
+    <a class="header__phone" href="tel:+380732772377">+380 73 277 23 77</a>
+    <div class="header__chat">
+      <a class="chat-btn" href="https://wa.me/380732772377" target="_blank" rel="noopener" aria-label="Написати у WhatsApp"><svg class="ico"><use href="#i-wa"/></svg></a>
+      <a class="chat-btn" href="viber://chat?number=%2B380732772377" aria-label="Написати у Viber"><svg class="ico"><use href="#i-vb"/></svg></a>
+    </div>
+    <a class="btn btn--white" href="#calc" data-magnetic>Зв’язатися<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a>
+    <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <nav aria-label="Мобільна навігація">
+    <a href="#process"><span>01</span>Як працюємо</a><a href="#directions"><span>02</span>Напрямки</a><a href="#services"><span>03</span>Послуги</a><a href="#gallery"><span>04</span>Об’єкти</a><a href="#calc"><span>05</span>Розрахунок</a>
+  </nav>
+  <div class="menu__foot"><a href="tel:+380732772377">+380 73 277 23 77</a><div class="menu__chat"><a href="https://wa.me/380732772377" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>WhatsApp</a><a href="viber://chat?number=%2B380732772377"><svg class="ico"><use href="#i-vb"/></svg>Viber</a></div><a class="btn btn--white" href="#calc">Розрахувати логістику<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a></div>
+</div>
+
+<main>
+<!-- HERO: container terminal, our supervisor in branded uniform -->
+<section class="hero" id="top" aria-label="Головний екран">
+  <picture class="hero__media">
+    <source media="(max-aspect-ratio: 4/5)" srcset="assets/img/hero-port-v-720.webp 720w, assets/img/hero-port-v.webp 1024w" sizes="100vw">
+    <img src="assets/img/hero-port.webp" srcset="assets/img/hero-port-1024.webp 1024w, assets/img/hero-port.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Працівник у фірмовій формі Formica Logistics на контейнерному терміналі" fetchpriority="high" decoding="async">
+  </picture>
+  <div class="hero__shade"></div>
+  <div class="hero__content">
+    <div>
+      <p class="eyebrow">30 років у портовій логістиці</p>
+      <h1 class="hero__title" data-split>Логістика,<br>яка <span class="dim">захоплює.</span></h1>
+    </div>
+    <div>
+      <p class="hero__lead">Поєднуємо море, дороги та залізницю. Знаходимо шлях для вашого вантажу — від причалу до кінцевої точки.</p>
+      <div class="hero__actions">
+        <a class="btn btn--white" href="#calc" data-magnetic>Розрахувати логістику<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a>
+        <a class="btn btn--line btn--phone" href="tel:+380732772377"><svg class="ico"><use href="#i-phone"/></svg>+380 73 277 23 77</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero__bar">
+    <ul class="facts">
+      <li><b>30</b>років досвіду</li>
+      <li><b>300 000+</b>тонн на рік</li>
+      <li><b>15+</b>одиниць техніки</li>
+    </ul>
+    <div class="scroll-cue" aria-hidden="true"><i></i><span>Гортайте</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE: cargo seen in the footage -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <div class="marquee__item"><span>Зерно</span><svg><use href="#i-mark"/></svg></div>
+    <div class="marquee__item"><span>Біг-беги</span><svg><use href="#i-mark"/></svg></div>
+    <div class="marquee__item"><span>Металопрокат</span><svg><use href="#i-mark"/></svg></div>
+    <div class="marquee__item"><span>Металобрухт</span><svg><use href="#i-mark"/></svg></div>
+    <div class="marquee__item"><span>Щебінь</span><svg><use href="#i-mark"/></svg></div>
+    <div class="marquee__item"><span>Негабаритна техніка</span><svg><use href="#i-mark"/></svg></div>
+  </div>
+</div>
+
+<!-- PROCESS: six services, each shown on footage -->
+<section class="reel" id="process" aria-labelledby="reel-title">
+  <div class="reel__stage">
+    <div class="reel__copy">
+      <p class="eyebrow">Сервіс у кадрі</p>
+      <h2 class="h2" id="reel-title" data-split>Від трюму —<br><em>до кінцевої точки</em></h2>
+      <ol class="reel__steps">
+        <li class="is-on"><span class="reel__n">01</span><div><h3>Стивідорні послуги</h3><p>Навантажувальні та розвантажувальні роботи під час обробки суден.</p></div>
+          <figure class="reel__media is-on"><video muted playsinline loop preload="none" poster="assets/video/coil-lift.jpg" data-src="assets/video/coil-lift.mp4" aria-hidden="true"></video></figure></li>
+        <li><span class="reel__n">02</span><div><h3>Портова перевалка</h3><p>Обробка й перевантаження вантажів між морським і наземним транспортом.</p></div>
+          <figure class="reel__media"><video muted playsinline loop preload="none" poster="assets/video/atlas-barge.jpg" data-src="assets/video/atlas-barge.mp4" aria-hidden="true"></video></figure></li>
+        <li><span class="reel__n">03</span><div><h3>Фасування вантажів</h3><p>Підготовка та фасування відповідно до вимог зберігання й транспортування.</p></div>
+          <figure class="reel__media"><img src="assets/img/port-bagging.webp" alt="Фасувальна установка Formica Logistics у порту" loading="lazy" decoding="async"></figure></li>
+        <li><span class="reel__n">04</span><div><h3>Складські послуги</h3><p>Зберігання та підготовка вантажів до наступного етапу маршруту.</p></div>
+          <figure class="reel__media"><video muted playsinline loop preload="none" poster="assets/video/bags-yard.jpg" data-src="assets/video/bags-yard.mp4" aria-hidden="true"></video></figure></li>
+        <li><span class="reel__n">05</span><div><h3>Експедирування та агентування</h3><p>Організаційний супровід вантажу й координація учасників портових операцій.</p></div>
+          <figure class="reel__media"><video muted playsinline loop preload="none" poster="assets/video/port-drive.jpg" data-src="assets/video/port-drive.mp4" aria-hidden="true"></video></figure></li>
+        <li><span class="reel__n">06</span><div><h3>Митне оформлення та сертифікація</h3><p>Супровід документальних процедур для переміщення вантажу через кордон.</p></div>
+          <figure class="reel__media"><img src="assets/img/convoy-blue.webp" alt="Тягач із низькорамним тралом і перевантажувачем на майданчику" loading="lazy" decoding="async"></figure></li>
+      </ol>
+    </div>
+    <div class="reel__frame" aria-hidden="true">
+      <i class="crop crop--tl"></i><i class="crop crop--tr"></i>
+      <div class="reel__hud"><span><b id="reel-n">01</b> / 06</span><span id="reel-cap">Стивідорні послуги</span></div>
+    </div>
+    <div class="reel__bar" aria-hidden="true"><i></i></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="sec stats" id="about-numbers" aria-labelledby="stats-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Цифри</p>
+      <h2 class="h2" id="stats-title" data-split>Показники, що <em>тримають вагу</em></h2>
+      <p class="lead" data-reveal>Три десятиліття роботи в порту — і клієнти, які повертаються знову.</p>
+    </header>
+    <ol class="figs">
+      <li class="fig"><span class="fig__num"><span data-count="30">30</span><small>років</small></span><p>досвіду та практики в логістиці</p></li>
+      <li class="fig"><span class="fig__num" data-count="90" data-suffix="%">90%</span><p>клієнтів повертаються з повторними замовленнями</p></li>
+      <li class="fig"><span class="fig__num" data-count="15" data-suffix="+">15+</span><p>одиниць власної спеціалізованої техніки</p></li>
+      <li class="fig"><span class="fig__num" data-count="300000" data-suffix="+">300 000+</span><p>тонн середньорічного вантажообігу</p></li>
+      <li class="fig"><span class="fig__num" data-count="0" data-suffix="%">0%</span><p>ризику простою судна під час обробки вантажу</p></li>
+    </ol>
+    <figure class="band" data-reveal>
+      <img src="assets/img/port-night.webp" alt="Нічне навантаження самоскида перевантажувачем із написом «Форміка Логістікс»" loading="lazy" decoding="async">
+      <figcaption><span>Нічне навантаження самоскида</span><span>Кадр з об’єкта</span></figcaption>
+    </figure>
+    <div class="stats__note" data-reveal><span><strong>Порт, склад, авто та залізниця</strong> — в одних руках.</span><a class="btn btn--line" href="#calc">Розрахувати свій вантаж<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a></div>
+  </div>
+</section>
+
+<!-- DIRECTIONS -->
+<section class="sec dirs" id="directions" aria-labelledby="dirs-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Ключові напрямки</p>
+      <h2 class="h2" id="dirs-title" data-split>Три напрямки. <em>Одна відповідальність.</em></h2>
+      <p class="lead" data-reveal>Ввозите, вивозите чи перевозите всередині країни — беремо на себе весь ланцюг.</p>
+    </header>
+    <div class="dirs__panels">
+      <article class="dir is-active" tabindex="0" aria-labelledby="dir-1">
+        <img src="assets/img/grab-barge.webp" alt="Перевантажувач із грейфером розвантажує баржу" loading="lazy" decoding="async" style="object-position:40% 50%">
+        <span class="dir__num">01</span><span class="dir__tag">Ввезення в країну</span>
+        <span class="dir__vt" aria-hidden="true">Імпорт</span>
+        <div class="dir__body"><h3 id="dir-1">Імпортне перевантаження</h3><p>Комплексні послуги з обробки та транспортування вантажів, що ввозяться в країну.</p><a class="btn btn--white" href="#calc" data-service="Портова перевалка">Розрахувати імпорт<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a></div>
+      </article>
+      <article class="dir" tabindex="0" aria-labelledby="dir-2">
+        <img src="assets/img/barge-dusk.webp" alt="Навантаження баржі біг-бегами перевантажувачем" loading="lazy" decoding="async" style="object-position:60% 50%">
+        <span class="dir__num">02</span><span class="dir__tag">Вивезення з країни</span>
+        <span class="dir__vt" aria-hidden="true">Експорт</span>
+        <div class="dir__body"><h3 id="dir-2">Експортне перевантаження</h3><p>Комплексні послуги з приймання, обробки та навантаження вантажів, що вивозяться з країни.</p><a class="btn btn--white" href="#calc" data-service="Стивідорні послуги">Розрахувати експорт<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a></div>
+      </article>
+      <article class="dir" tabindex="0" aria-labelledby="dir-3">
+        <img src="assets/img/wagon-lift.webp" alt="Портові крани піднімають залізничний вагон-хопер" loading="lazy" decoding="async" style="object-position:50% 60%">
+        <span class="dir__num">03</span><span class="dir__tag">Суходолом</span>
+        <span class="dir__vt" aria-hidden="true">Авто / ЗД</span>
+        <div class="dir__body"><h3 id="dir-3">Вантажні авто та ЗД перевезення</h3><p>Надійні та ефективні рішення для транспортування вантажів автомобільними й залізничними маршрутами.</p><a class="btn btn--white" href="#calc" data-mode="1">Розрахувати маршрут<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec services on-dark" id="services" aria-labelledby="svc-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Логістичні послуги</p>
+      <h2 class="h2" id="svc-title" data-split>Усе, що потрібно <em>вашому вантажу</em></h2>
+      <p class="lead" data-reveal>Порт, склад, документи. Поєднуємо потрібні послуги в один зрозумілий процес — оберіть послугу, і ми підготуємо розрахунок.</p>
+    </header>
+    <figure class="svc__peek" aria-hidden="true"><img alt="" loading="lazy" decoding="async"></figure>
+    <ul class="svc">
+      <li><button class="svc__row" data-service="Портова перевалка"><span class="svc__num">01</span><span class="svc__title">Портова перевалка</span><span class="svc__desc">Обробка й перевантаження вантажів між морським і наземним транспортом.</span><span class="svc__go"><svg class="ico"><use href="#i-crane"/></svg></span></button></li>
+      <li><button class="svc__row" data-service="Фасування вантажів"><span class="svc__num">02</span><span class="svc__title">Фасування вантажів</span><span class="svc__desc">Підготовка та фасування відповідно до вимог зберігання й транспортування.</span><span class="svc__go"><svg class="ico"><use href="#i-bag"/></svg></span></button></li>
+      <li><button class="svc__row" data-service="Стивідорні послуги"><span class="svc__num">03</span><span class="svc__title">Стивідорні послуги</span><span class="svc__desc">Навантажувальні та розвантажувальні роботи під час обробки суден.</span><span class="svc__go"><svg class="ico"><use href="#i-hook"/></svg></span></button></li>
+      <li><button class="svc__row" data-service="Складські послуги"><span class="svc__num">04</span><span class="svc__title">Складські послуги</span><span class="svc__desc">Зберігання та підготовка вантажів до наступного етапу маршруту.</span><span class="svc__go"><svg class="ico"><use href="#i-warehouse"/></svg></span></button></li>
+      <li><button class="svc__row" data-service="Експедирування та агентування"><span class="svc__num">05</span><span class="svc__title">Експедирування та агентування</span><span class="svc__desc">Організаційний супровід вантажу й координація учасників портових операцій.</span><span class="svc__go"><svg class="ico"><use href="#i-route"/></svg></span></button></li>
+      <li><button class="svc__row" data-service="Митне оформлення"><span class="svc__num">06</span><span class="svc__title">Митне оформлення та сертифікація</span><span class="svc__desc">Супровід документальних процедур для переміщення вантажу через кордон.</span><span class="svc__go"><svg class="ico"><use href="#i-doc"/></svg></span></button></li>
+    </ul>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="sec philo" id="about" aria-labelledby="philo-title">
+  <div class="wrap">
+    <p class="eyebrow" id="philo-title">Наша філософія</p>
+    <p class="philo__text" data-words>Даємо Клієнту можливість зосередити зусилля на тому, що в нього виходить найкраще. А логістичний сервіс — <em>це наша робота.</em></p>
+    <div class="bento">
+      <article class="bcard bcard--ant" data-reveal>
+        <img class="ant-photo" src="assets/img/ant.webp" alt="Мураха несе камінь, більший за неї саму" loading="lazy" decoding="async">
+        <div>
+          <h3>Formica — латиною <em>«мураха»</em></h3>
+          <p>Мурахи працюють як єдина система й переносять вантажі, що в десятки разів важчі за них самих. За тим самим принципом ми будуємо логістику: злагоджена команда, точність і сила, яка перевищує очікування.</p>
+        </div>
+      </article>
+      <article class="bcard" data-reveal><span class="bcard__ico"><svg class="ico"><use href="#i-shield"/></svg></span><div><h3>Безпечний і надійний сервіс</h3><p>Контроль кожного етапу — від причалу до складу.</p></div></article>
+      <article class="bcard" data-reveal><span class="bcard__ico"><svg class="ico"><use href="#i-spark"/></svg></span><div><h3>Інноваційні методи</h3><p>Впроваджуємо нові рішення, щоб вантаж рухався швидше.</p></div></article>
+      <article class="bcard" data-reveal><span class="bcard__ico"><svg class="ico"><use href="#i-support"/></svg></span><div><h3>Постійна підтримка</h3><p>Менеджер на зв’язку на кожному кроці маршруту.</p></div></article>
+      <article class="bcard bcard--photo" data-reveal><img src="assets/img/convoy-white.webp" alt="" loading="lazy" decoding="async"><span class="bcard__big">90%</span><div><h3>Довгострокові стосунки</h3><p>Клієнтів повертаються до нас знову. Будуємо стійке партнерство, а не разові угоди.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM: the people next to the cargo -->
+<section class="sec team" id="team" aria-labelledby="team-title">
+  <div class="wrap team__grid">
+    <div class="team__copy">
+      <p class="eyebrow">Команда</p>
+      <h2 class="h2" id="team-title" data-split>Люди, які <em>відповідають за вантаж</em></h2>
+      <p class="lead" data-reveal>Поруч із вантажем і з клієнтами: на майданчиках, біля техніки та на галузевих подіях.</p>
+      <div class="team__contact" data-reveal>
+        <a class="btn btn--dark" href="https://wa.me/380732772377" target="_blank" rel="noopener" data-magnetic>Написати у WhatsApp<span class="btn__ico"><svg class="ico"><use href="#i-wa"/></svg></span></a>
+        <a class="btn btn--line btn--phone" href="tel:+380732772377"><svg class="ico"><use href="#i-phone"/></svg>+380 73 277 23 77</a>
+      </div>
+    </div>
+    <div class="team__photos">
+      <figure class="team__ph team__ph--main"><div class="team__img"><img src="assets/img/team-atlas-2.webp" alt="Представник Formica Logistics на тралі поруч із перевантажувачем Atlas" loading="lazy" decoding="async" style="object-position:50% 40%"></div><figcaption><span>01</span>Поруч із технікою</figcaption></figure>
+      <div class="team__side">
+        <figure class="team__ph"><div class="team__img"><img src="assets/img/team-atlas-1.webp" alt="Представник Formica Logistics біля кабіни перевантажувача Atlas" loading="lazy" decoding="async" style="object-position:50% 55%"></div><figcaption><span>02</span>Перевантажувач Atlas на тралі</figcaption></figure>
+        <figure class="team__ph"><div class="team__img"><img src="assets/img/team-expo.webp" alt="Представник Formica Logistics на галузевій виставці BIG FERT" loading="lazy" decoding="async" style="object-position:50% 30%"></div><figcaption><span>03</span>Галузева виставка BIG FERT</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY: frames from the sites -->
+<section class="gal" id="gallery" aria-labelledby="gal-title">
+  <div class="gal__stage">
+    <header class="gal__head wrap">
+      <p class="eyebrow">Об’єкти</p>
+      <h2 class="h2" id="gal-title" data-split>Кадри <em>з об’єктів</em></h2>
+      <div><p class="lead" data-reveal>Без рендерів і стокових фото. Так виглядає робота на причалах, баржах і майданчиках.</p><span class="gal__count" aria-hidden="true">Кадр <b id="gal-n">01</b> / 08</span></div>
+    </header>
+    <div class="gal__track">
+      <figure class="gal__item" style="--a:.62"><div class="gal__media"><img src="assets/img/scrap-1.webp" alt="Перевантажувач грейфером вивантажує металобрухт із баржі" loading="lazy" decoding="async"></div><figcaption><span>01</span><b>Металобрухт</b>Вивантаження баржі грейфером</figcaption></figure>
+      <figure class="gal__item" style="--a:.5625"><div class="gal__media"><video muted playsinline loop preload="none" poster="assets/video/grain-grab.jpg" data-src="assets/video/grain-grab.mp4" aria-hidden="true"></video></div><figcaption><span>02</span><b>Зерно</b>Портальний кран із грейфером</figcaption></figure>
+      <figure class="gal__item" style="--a:1.33"><div class="gal__media"><img src="assets/img/convoy-booms.webp" alt="Перевантажувачі на низькорамних тралах перед відправкою" loading="lazy" decoding="async"></div><figcaption><span>03</span><b>Негабарит</b>Перевантажувачі на низькорамних тралах</figcaption></figure>
+      <figure class="gal__item" style="--a:.5625"><div class="gal__media"><video muted playsinline loop preload="none" poster="assets/video/stone-dump.jpg" data-src="assets/video/stone-dump.mp4" aria-hidden="true"></video></div><figcaption><span>04</span><b>Щебінь</b>Вивантаження самоскида</figcaption></figure>
+      <figure class="gal__item" style="--a:.75"><div class="gal__media"><img src="assets/img/bagging-station.webp" alt="Фасувальна станція з рольгангами на причалі біля портальних кранів" loading="lazy" decoding="async"></div><figcaption><span>05</span><b>Фасування</b>Фасувальна станція на причалі</figcaption></figure>
+      <figure class="gal__item" style="--a:1.33"><div class="gal__media"><img src="assets/img/fuchs-yard.webp" alt="Перевантажувач Fuchs MHL 350 на майданчику" loading="lazy" decoding="async"></div><figcaption><span>06</span><b>Техніка</b>Перевантажувач Fuchs MHL 350</figcaption></figure>
+      <figure class="gal__item" style="--a:.5625"><div class="gal__media"><video muted playsinline loop preload="none" poster="assets/video/grab-crane.jpg" data-src="assets/video/grab-crane.mp4" aria-hidden="true"></video></div><figcaption><span>07</span><b>Навалочні вантажі</b>Робота портального крана</figcaption></figure>
+      <figure class="gal__item" style="--a:.62"><div class="gal__media"><img src="assets/img/scrap-2.webp" alt="Грейфер над трюмом баржі з металобрухтом" loading="lazy" decoding="async"></div><figcaption><span>08</span><b>Металобрухт</b>Обробка баржі біля причалу</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section class="sec strategy" id="strategy" aria-labelledby="strat-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Стратегія</p>
+      <h2 class="h2" id="strat-title" data-split>Стратегія <em>«Форміки»</em></h2>
+      <p class="lead" data-reveal>Чотири принципи, на яких тримається кожне перевезення.</p>
+    </header>
+    <div class="scards">
+      <article class="scard scard--1" style="--i:0"><div class="scard__head"><span class="scard__num">01</span><h3>Час</h3></div><p>Виконувати вчасно, адже час — найцінніший ресурс.</p><div class="scard__art" aria-hidden="true"><svg viewBox="0 0 200 200"><circle class="draw" pathLength="1" cx="100" cy="100" r="84"/><g class="fade"><line x1="100.0" y1="36.0" x2="100.0" y2="24.0"/><line x1="132.0" y1="44.6" x2="136.0" y2="37.6"/><line x1="155.4" y1="68.0" x2="162.4" y2="64.0"/><line x1="164.0" y1="100.0" x2="176.0" y2="100.0"/><line x1="155.4" y1="132.0" x2="162.4" y2="136.0"/><line x1="132.0" y1="155.4" x2="136.0" y2="162.4"/><line x1="100.0" y1="164.0" x2="100.0" y2="176.0"/><line x1="68.0" y1="155.4" x2="64.0" y2="162.4"/><line x1="44.6" y1="132.0" x2="37.6" y2="136.0"/><line x1="36.0" y1="100.0" x2="24.0" y2="100.0"/><line x1="44.6" y1="68.0" x2="37.6" y2="64.0"/><line x1="68.0" y1="44.6" x2="64.0" y2="37.6"/></g><line class="hand hand--h" x1="100" y1="100" x2="100" y2="62"/><line class="hand hand--m" x1="100" y1="100" x2="100" y2="34"/><circle cx="100" cy="100" r="5" fill="currentColor"/></svg></div></article>
+      <article class="scard scard--2" style="--i:1"><div class="scard__head"><span class="scard__num">02</span><h3>Якість</h3></div><p>Забезпечувати високу якість, бо саме вона визначає успіх.</p><div class="scard__art" aria-hidden="true"><svg viewBox="0 0 200 200"><polygon class="draw" pathLength="1" points="100.0,18.0 118.1,32.4 141.0,29.0 149.5,50.5 171.0,59.0 167.6,81.9 182.0,100.0 167.6,118.1 171.0,141.0 149.5,149.5 141.0,171.0 118.1,167.6 100.0,182.0 81.9,167.6 59.0,171.0 50.5,149.5 29.0,141.0 32.4,118.1 18.0,100.0 32.4,81.9 29.0,59.0 50.5,50.5 59.0,29.0 81.9,32.4"/><circle class="draw d2" pathLength="1" cx="100" cy="100" r="52"/><path class="draw d3" pathLength="1" d="M76 101l17 17 33-36"/></svg></div></article>
+      <article class="scard scard--3" style="--i:2"><div class="scard__head"><span class="scard__num">03</span><h3>Оптимізація</h3></div><p>Вдосконалювати та оптимізувати ланцюги поставок.</p><div class="scard__art" aria-hidden="true"><svg viewBox="0 0 200 200"><path class="draw" pathLength="1" d="M34 150 C 56 112, 44 76, 72 62 S 108 92, 118 112 S 146 64, 164 48"/><path class="draw d2" pathLength="1" d="M118 112 C 134 132, 148 142, 168 152"/><path class="draw d2 dash" pathLength="1" d="M72 62 C 92 40, 130 36, 164 48"/><circle class="node" cx="34" cy="150" r="8"/><circle class="node" cx="72" cy="62" r="8"/><circle class="node" cx="118" cy="112" r="8"/><circle class="node" cx="164" cy="48" r="8"/><circle class="node" cx="168" cy="152" r="8"/><circle r="6" fill="currentColor" class="runner"><animateMotion dur="3.6s" repeatCount="indefinite" path="M34 150 C 56 112, 44 76, 72 62 S 108 92, 118 112 S 146 64, 164 48"/></circle></svg></div></article>
+      <article class="scard scard--4" style="--i:3"><div class="scard__head"><span class="scard__num">04</span><h3>Продукт</h3></div><p>Створювати комплексний та ефективний логістичний продукт.</p><div class="scard__art" aria-hidden="true"><svg viewBox="0 0 200 200"><circle class="ring" cx="100" cy="106" r="92"/><path class="draw" pathLength="1" d="M40 72 L100 40 L160 72 L160 142 L100 174 L40 142 Z"/><path class="draw d2" pathLength="1" d="M40 72 L100 104 L160 72 M100 104 L100 174"/><g class="fade"><line x1="52" y1="84.4" x2="52" y2="142.4"/><line x1="62" y1="89.7" x2="62" y2="147.7"/><line x1="72" y1="95.1" x2="72" y2="153.1"/><line x1="82" y1="100.4" x2="82" y2="158.4"/><line x1="92" y1="105.7" x2="92" y2="163.7"/><line x1="112" y1="103.6" x2="112" y2="161.6"/><line x1="122" y1="98.3" x2="122" y2="156.3"/><line x1="132" y1="92.9" x2="132" y2="150.9"/><line x1="142" y1="87.6" x2="142" y2="145.6"/><line x1="152" y1="82.3" x2="152" y2="140.3"/></g></svg></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="sec calc" id="calc" aria-labelledby="calc-title">
+  <div class="wrap calc__grid">
+    <div class="calc__visual" data-reveal>
+      <figure class="calc__media is-on"><video muted playsinline loop preload="none" poster="assets/video/ship-grain.jpg" data-src="assets/video/ship-grain.mp4" aria-hidden="true"></video></figure>
+      <figure class="calc__media"><video muted playsinline loop preload="none" poster="assets/video/fuchs-truck.jpg" data-src="assets/video/fuchs-truck.mp4" aria-hidden="true"></video></figure>
+      <figure class="calc__media"><img src="assets/img/wagon-lift.webp" alt="" loading="lazy" decoding="async"></figure>
+      <div class="calc__top"><span class="calc__chip" id="calc-chip">Море</span><span class="calc__hint">Кадр з об’єкта</span></div>
+      <div class="calc__cap"><span>Ваш запит</span><strong id="calc-summary">Море · 500 т</strong></div>
+    </div>
+
+    <form class="calc__form" id="calc-form" novalidate>
+      <p class="eyebrow">Розрахунок</p>
+      <h2 class="h2" id="calc-title" data-split>Розрахунок <em>вартості послуг</em></h2>
+
+      <fieldset>
+        <legend>Вид транспорту</legend>
+        <div class="seg">
+          <input type="radio" name="mode" id="m0" value="0" checked><label for="m0"><svg class="ico"><use href="#i-ship"/></svg>Море</label>
+          <input type="radio" name="mode" id="m1" value="1"><label for="m1"><svg class="ico"><use href="#i-truck"/></svg>Авто</label>
+          <input type="radio" name="mode" id="m2" value="2"><label for="m2"><svg class="ico"><use href="#i-train"/></svg>Залізниця</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Тип вантажу</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="cargo" value="Зерно та олійні"><span>Зерно та олійні</span></label>
+          <label class="chip"><input type="radio" name="cargo" value="Навалочний"><span>Навалочний</span></label>
+          <label class="chip"><input type="radio" name="cargo" value="Контейнери"><span>Контейнери</span></label>
+          <label class="chip"><input type="radio" name="cargo" value="Генеральний"><span>Генеральний</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Напрямок</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="dir" value="Імпорт"><span>Імпорт</span></label>
+          <label class="chip"><input type="radio" name="dir" value="Експорт"><span>Експорт</span></label>
+          <label class="chip"><input type="radio" name="dir" value="Транзит"><span>Транзит</span></label>
+          <label class="chip"><input type="radio" name="dir" value="Внутрішні перевезення"><span>Внутрішні</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Потрібні послуги</legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="svc" value="Портова перевалка"><span>Портова перевалка</span></label>
+          <label class="chip"><input type="checkbox" name="svc" value="Фасування вантажів"><span>Фасування</span></label>
+          <label class="chip"><input type="checkbox" name="svc" value="Стивідорні послуги"><span>Стивідорні</span></label>
+          <label class="chip"><input type="checkbox" name="svc" value="Складські послуги"><span>Складські</span></label>
+          <label class="chip"><input type="checkbox" name="svc" value="Експедирування та агентування"><span>Експедирування</span></label>
+          <label class="chip"><input type="checkbox" name="svc" value="Митне оформлення"><span>Митне оформлення</span></label>
+        </div>
+      </fieldset>
+
+      <div class="range">
+        <div class="range__head"><label class="fl" for="tons">Обсяг вантажу</label><output id="tons-out" for="tons">500 т</output></div>
+        <input type="range" id="tons" name="tons" min="10" max="10000" step="10" value="500">
+        <div class="range__scale"><span>10 т</span><span>10 000 т</span></div>
+      </div>
+
+      <div class="row2">
+        <label class="field"><span class="fl">Звідки</span><input name="from" placeholder="Порт або місто" autocomplete="off" maxlength="80"></label>
+        <label class="field"><span class="fl">Куди</span><input name="to" placeholder="Порт або місто" autocomplete="off" maxlength="80"></label>
+      </div>
+      <div class="row2">
+        <label class="field" data-field="name"><span class="fl">Ваше ім’я *</span><input name="name" autocomplete="name" maxlength="60" required><span class="field__err">Вкажіть, як до вас звертатися</span></label>
+        <label class="field" data-field="phone"><span class="fl">Телефон *</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380" maxlength="19" required><span class="field__err">Перевірте номер: +380 XX XXX XX XX</span></label>
+      </div>
+      <label class="field"><span class="fl">Коментар</span><textarea name="comment" rows="3" maxlength="600" placeholder="Бажані терміни, упаковка, особливості"></textarea></label>
+
+      <div class="calc__submit">
+        <button class="btn btn--dark" type="submit" data-magnetic>Отримати розрахунок<span class="btn__ico"><svg class="ico"><use href="#i-arrow"/></svg></span></button>
+        <p>Менеджер уточнить деталі та надішле вартість.</p>
+      </div>
+      <div class="calc__done" id="calc-done" hidden role="status">
+        <h3>Заявку сформовано</h3>
+        <pre id="calc-text"></pre>
+        <div class="btns">
+          <a class="btn btn--white" id="calc-wa" href="https://wa.me/380732772377" target="_blank" rel="noopener">Надіслати у WhatsApp<span class="btn__ico"><svg class="ico"><use href="#i-wa"/></svg></span></a>
+          <a class="btn btn--line" href="tel:+380732772377">Зателефонувати</a>
+          <button class="btn btn--line" type="button" id="calc-copy">Скопіювати заявку</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contacts" aria-labelledby="cta-title">
+  <svg class="cta__deco" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-mark"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Ваш наступний маршрут починається тут</p>
+    <h2 id="cta-title" data-split>Є вантаж?<br><span class="dim">Знайдемо шлях.</span></h2>
+    <div class="cta__row">
+      <a class="cta__phone" href="tel:+380732772377"><small>Телефонуйте</small>+380 73 277 23 77</a>
+      <a class="cta__btn" href="#calc" data-magnetic><span><svg class="ico"><use href="#i-arrow"/></svg>Обговорити<br>перевезення</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__about"><a class="logo" href="#top"><svg aria-hidden="true"><use href="#i-mark"/></svg><span class="logo__name">FORMICA<span>LOGISTICS</span></span></a><p>Оперуючи процесом, прагнемо визначити майбутнє логістики.</p></div>
+      <div><h4>Навігація</h4><ul><li><a href="#process">Як працюємо</a></li><li><a href="#directions">Напрямки</a></li><li><a href="#services">Послуги</a></li><li><a href="#gallery">Об’єкти</a></li><li><a href="#team">Команда</a></li></ul></div>
+      <div><h4>Послуги</h4><ul><li>Портова перевалка</li><li>Стивідорні послуги</li><li>Складські послуги</li><li>Митне оформлення</li></ul></div>
+      <div><h4>Контакти</h4><ul><li><a href="tel:+380732772377">+380 73 277 23 77</a></li><li><a href="https://wa.me/380732772377" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="#calc">Розрахунок вартості</a></li></ul></div>
+    </div>
+    <div class="footer__word" aria-hidden="true">FORMICA</div>
+    <div class="footer__bottom"><span>© 2026 Formica Logistics</span><span>Море. Дорога. Залізниця.</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="module">
+/* ================= UI: footage, scroll scenes, calculator ================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const saveData = !!navigator.connection?.saveData;
+const G = window.gsap;
+const ST = window.ScrollTrigger;
+if (G && ST) G.registerPlugin(ST);
+const fmt = n => Math.round(n).toLocaleString('uk-UA').replace(/\s/g, ' ');
+const motion = !!(G && !reduced);
+
+/* ---------- smooth scroll ---------- */
+let lenis = null;
+if (!reduced && window.Lenis) {
+  lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
+  if (G) {
+    if (ST) lenis.on('scroll', ST.update);
+    G.ticker.add(t => lenis.raf(t * 1000));
+    G.ticker.lagSmoothing(0);
+  } else {
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+}
+const scrollToEl = el => {
+  if (lenis) lenis.scrollTo(el, { offset: el.id === 'top' ? 0 : -80, duration: 1.5 });
+  else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+};
+
+/* ---------- header + menu ---------- */
+const header = $('#header');
+let lastY = 0;
+const onScroll = () => {
+  const y = scrollY;
+  header.classList.toggle('is-solid', y > innerHeight * 0.6);
+  header.classList.toggle('is-hidden', y > lastY && y > innerHeight * 1.2 && !document.body.classList.contains('menu-open'));
+  lastY = y;
+};
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+const burger = $('.burger');
+const setMenu = open => {
+  document.body.classList.toggle('menu-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+  if (lenis) open ? lenis.stop() : lenis.start();
+};
+burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href');
+  const el = id.length > 1 && $(id);
+  if (!el) return;
+  e.preventDefault();
+  setMenu(false);
+  if (a.dataset.service) selectService(a.dataset.service);
+  if (a.dataset.mode) setMode(+a.dataset.mode);
+  scrollToEl(el);
+  if (id === '#calc') flashCalc();
+}));
+
+/* ---------- split helpers ---------- */
+function splitWords(el, cls = 'w') {
+  const out = [];
+  const walk = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.append(' '); return; }
+          const outer = document.createElement('span');
+          outer.className = cls;
+          if (cls === 'w') {
+            const inner = document.createElement('span');
+            inner.className = 'wi';
+            inner.textContent = p;
+            outer.append(inner);
+            out.push(inner);
+          } else {
+            outer.textContent = p;
+            out.push(outer);
+          }
+          frag.append(outer);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+  };
+  walk(el);
+  return out;
+}
+
+/* ---------- footage: load on approach, play only while visible ---------- */
+const noVideo = reduced || saveData;
+const play = v => {
+  if (noVideo) return;
+  if (!v.src) { v.src = v.dataset.src; v.muted = true; }
+  const p = v.play();
+  if (p) p.catch(() => {});
+};
+const pause = v => { if (!v.paused) v.pause(); };
+const vio = new IntersectionObserver(es => es.forEach(e => {
+  if (e.target.closest('[data-vmanaged]')) return;      // reel / calculator decide for themselves
+  e.isIntersecting ? play(e.target) : pause(e.target);
+}), { rootMargin: '200px 0px' });
+$$('video[data-src]').forEach(v => vio.observe(v));
+
+/* ---------- loader ---------- */
+const loader = $('.loader');
+const heroWords = splitWords($('.hero__title'));
+let opened = false;
+function openPage() {
+  if (opened) return;
+  opened = true;
+  loader?.classList.add('is-done');
+  setTimeout(() => loader?.remove(), 1300);
+  heroIntro();
+}
+if (motion) {
+  G.set('.hero__media', { clipPath: 'inset(100% 0% 0% 0%)' });
+  G.set(heroWords, { yPercent: 110 });
+}
+if (!loader || !motion) { loader?.remove(); opened = true; }
+else {
+  const num = $('.loader__num'), line = $('.loader__line'), lp = { v: 0 };
+  const paint = () => { num.textContent = String(Math.round(lp.v)).padStart(2, '0'); line.style.transform = `scaleX(${lp.v / 100})`; };
+  const fill = G.to(lp, { v: 86, duration: 1.4, ease: 'power2.out', onUpdate: paint });
+  let finishing = false;
+  const finish = () => {
+    if (finishing) return;
+    finishing = true;
+    G.to(lp, { v: 100, duration: 0.35, ease: 'power2.in', delay: Math.max(0, 0.9 - fill.time()), onUpdate: paint, onComplete: openPage });
+  };
+  const heroImg = $('.hero__media img');
+  if (heroImg?.complete) finish(); else heroImg?.addEventListener('load', finish, { once: true });
+  setTimeout(finish, 2600);
+}
+
+function heroIntro() {
+  if (!motion) return;
+  G.to('.hero__media', { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' });
+  G.from('.hero__media img', { scale: 1.18, duration: 2.4, ease: 'expo.out' });
+  G.to(heroWords, { yPercent: 0, duration: 1.3, ease: 'expo.out', stagger: 0.08, delay: 0.55 });
+  G.from(['.hero .eyebrow', '.hero__lead', '.hero__actions', '.hero__bar'], { y: 24, opacity: 0, duration: 1.1, ease: 'power3.out', stagger: 0.07, delay: 0.85 });
+}
+
+/* hero: content drifts away, the picture sinks */
+if (motion && ST) {
+  G.to('.hero__content, .hero__bar', { opacity: 0, y: -70, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=55%', scrub: true } });
+  G.to('.hero__media', { yPercent: 14, opacity: 0.45, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+}
+
+
+/* ---------- cursor ---------- */
+const cur = $('.cursor');
+if (cur && finePointer && !reduced) {
+  const label = $('span', cur);
+  let cx = innerWidth / 2, cy = innerHeight / 2, px = cx, py = cy, seen = false;
+  addEventListener('pointermove', e => {
+    cx = e.clientX; cy = e.clientY;
+    if (!seen) { seen = true; px = cx; py = cy; document.documentElement.classList.add('has-cursor'); }
+    const t = e.target.closest?.('[data-cursor], a, button, label, input, textarea, select, .dir');
+    const text = t?.dataset?.cursor || (t?.matches?.('.dir:not(.is-active)') ? 'Відкрити' : '');
+    cur.classList.toggle('is-label', !!text);
+    cur.classList.toggle('is-link', !text && !!t && !t.matches('input, textarea'));
+    cur.classList.toggle('is-hidden', !!t?.matches?.('input, textarea, .svc__row'));
+    if (text) label.textContent = text;
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => document.documentElement.classList.remove('has-cursor'));
+  document.addEventListener('pointerenter', () => { if (seen) document.documentElement.classList.add('has-cursor'); });
+  const tick = () => {
+    px += (cx - px) * .2; py += (cy - py) * .2;
+    cur.style.transform = `translate(${px}px, ${py}px)`;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+/* ---------- marquee ---------- */
+const track = $('.marquee__track');
+track.innerHTML += track.innerHTML;
+let mx = 0, marqueeOn = false;
+new IntersectionObserver(([e]) => { marqueeOn = e.isIntersecting; }).observe($('.marquee'));
+if (motion) {
+  G.ticker.add((time, dt) => {
+    if (!marqueeOn) return;
+    const boost = lenis ? Math.min(Math.abs(lenis.velocity) * 26, 900) : 0;
+    const dir = lenis && lenis.direction < 0 ? -1 : 1;
+    mx -= dir * (70 + boost) * dt / 1000;
+    const half = track.scrollWidth / 2;
+    if (-mx >= half) mx += half;
+    if (mx > 0) mx -= half;
+    track.style.transform = `translate3d(${mx}px,0,0)`;
+  });
+}
+
+/* ---------- pinned scenes (desktop): process reel + gallery ---------- */
+const reel = $('.reel'), reelSteps = $$('.reel__steps li'), reelMedia = $$('.reel__media');
+const reelVideo = i => reelMedia[i] && $('video', reelMedia[i]);
+let reelAt = -1, prevAt = -1, reelVisible = false;
+function setReel(i) {
+  if (i === reelAt) return;
+  prevAt = reelAt;
+  reelAt = i;
+  reelSteps.forEach((li, n) => { li.classList.toggle('is-on', n === i); li.classList.toggle('is-done', n < i); });
+  reelMedia.forEach((m, n) => { m.classList.toggle('is-on', n === i); m.classList.toggle('is-prev', n === prevAt); });
+  reelMedia.forEach((m, n) => { const v = reelVideo(n); if (v && n !== i && n !== prevAt) pause(v); });
+  const v = reelVideo(i);
+  if (v && reelVisible) play(v);
+  $('#reel-n').textContent = String(i + 1).padStart(2, '0');
+  $('#reel-cap').textContent = $('h3', reelSteps[i]).textContent;
+}
+new IntersectionObserver(([e]) => {
+  reelVisible = e.isIntersecting;
+  if (!reel.hasAttribute('data-vmanaged')) return;
+  const v = reelVideo(reelAt);
+  if (v) reelVisible ? play(v) : pause(v);
+}).observe($('.reel__stage'));
+
+const gal = $('.gal'), galItems = $$('.gal__item');
+/* unpinned gallery is a native horizontal strip: count the frame nearest the left edge */
+$('.gal__track').addEventListener('scroll', e => {
+  if (gal.classList.contains('is-pinned')) return;
+  const left = e.currentTarget.getBoundingClientRect().left;
+  let best = 0, dist = Infinity;
+  galItems.forEach((it, n) => { const d = Math.abs(it.getBoundingClientRect().left - left); if (d < dist) { dist = d; best = n; } });
+  $('#gal-n').textContent = String(best + 1).padStart(2, '0');
+}, { passive: true });
+const mm = motion && ST ? G.matchMedia() : null;
+mm?.add('(min-width: 981px)', () => {
+  /* reel: one service per scroll step */
+  reel.classList.add('is-pinned');
+  reel.setAttribute('data-vmanaged', '');
+  reelMedia.forEach(m => { const v = $('video', m); if (v) pause(v); });
+  reelAt = -1;
+  setReel(0);
+  const bar = $('.reel__bar i');
+  ST.create({
+    trigger: reel, start: 'top top', end: '+=' + reelSteps.length * 80 + '%', pin: '.reel__stage', scrub: true,
+    onUpdate: s => { setReel(Math.min(reelSteps.length - 1, Math.floor(s.progress * reelSteps.length))); bar.style.transform = `scaleX(${s.progress})`; }
+  });
+
+  /* gallery: vertical scroll drives a horizontal strip */
+  gal.classList.add('is-pinned');
+  const strip = $('.gal__track');
+  const dist = () => Math.max(0, strip.scrollWidth - innerWidth);
+  const galN = $('#gal-n');
+  const tween = G.to(strip, {
+    x: () => -dist(), ease: 'none',
+    scrollTrigger: {
+      trigger: gal, start: 'top top', end: () => '+=' + dist(), pin: '.gal__stage', scrub: 0.8, invalidateOnRefresh: true,
+      onUpdate: s => { galN.textContent = String(Math.min(galItems.length, 1 + Math.floor(s.progress * galItems.length))).padStart(2, '0'); }
+    }
+  });
+  $$('.gal__media > *').forEach(m => G.fromTo(m, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: m.parentElement, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true } }));
+
+  return () => {
+    reel.classList.remove('is-pinned');
+    reel.removeAttribute('data-vmanaged');
+    gal.classList.remove('is-pinned');
+    reelMedia.forEach(m => { const v = $('video', m); if (v) vio.unobserve(v), vio.observe(v); });
+  };
+});
+
+/* ---------- reveals ---------- */
+if (motion && ST) {
+  $$('[data-split]').forEach(el => {
+    if (el.classList.contains('hero__title')) return;
+    const words = splitWords(el);
+    G.from(words, { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.06, scrollTrigger: { trigger: el, start: 'top 86%' } });
+  });
+  $$('[data-reveal]').forEach(el => {
+    G.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
+  });
+
+  /* stats: numbers count up */
+  $$('[data-count]').forEach((num, i) => {
+    const to = +num.dataset.count, suffix = num.dataset.suffix || '';
+    const o = { v: 0 };
+    G.to(o, { v: to, duration: 1.8, ease: 'power3.out', delay: i * 0.1, scrollTrigger: { trigger: '.figs', start: 'top 80%' },
+      onStart: () => { num.textContent = '0' + suffix; }, onUpdate: () => { num.textContent = fmt(o.v) + suffix; }, onComplete: () => { num.textContent = fmt(to) + suffix; } });
+  });
+  G.from('.fig', { opacity: 0, y: 30, duration: 1, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.figs', start: 'top 85%' } });
+  G.fromTo('.band img', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.band', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* team: photos open from the bottom and drift inside their frames */
+  G.from('.team__img', { clipPath: 'inset(100% 0% 0% 0%)', duration: 1.4, ease: 'expo.inOut', stagger: 0.12, scrollTrigger: { trigger: '.team__photos', start: 'top 80%' } });
+  $$('.team__img img').forEach(img => G.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+  /* philosophy: words light up while scrolling */
+  const pw = splitWords($('[data-words]'), 'pw');
+  G.fromTo(pw, { opacity: 0.14 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '.philo__text', start: 'top 80%', end: 'bottom 45%', scrub: true } });
+
+  /* strategy: stacked cards recede */
+  const cards = $$('.scard');
+  const artIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('is-in', e.isIntersecting)), { threshold: .45 });
+  cards.forEach(c => artIO.observe(c));
+  cards.forEach((c, i) => {
+    if (i === cards.length - 1) return;
+    G.fromTo(c, { scale: 1, filter: 'brightness(1)' }, { scale: 0.93, filter: 'brightness(0.82)', ease: 'none', scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 25%', scrub: true } });
+  });
+
+  G.to('.cta__deco', { rotate: 25, yPercent: 20, ease: 'none', scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'bottom top', scrub: true } });
+  G.from('.footer__word', { yPercent: 40, ease: 'none', scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
+  document.fonts?.ready.then(() => ST.refresh());
+} else {
+  $$('.scard').forEach(c => c.classList.add('is-in'));
+}
+
+/* ---------- directions: expanding panels ---------- */
+const dirs = $$('.dir');
+const activateDir = d => dirs.forEach(x => x.classList.toggle('is-active', x === d));
+dirs.forEach(d => {
+  d.addEventListener('mouseenter', () => finePointer && activateDir(d));
+  d.addEventListener('focusin', () => activateDir(d));
+  d.addEventListener('click', () => activateDir(d));
+});
+
+/* ---------- services: photo that follows the cursor ---------- */
+const peek = $('.svc__peek');
+if (peek && finePointer && !reduced) {
+  const SVC_IMG = ['port-fuchs', 'bagging-station', 'scrap-2', 'port-elevator', 'convoy-white', 'convoy-booms'].map(n => `assets/img/${n}.webp`);
+  let warmed = false;
+  const img = $('img', peek), host = peek.parentElement;
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0, on = false;
+  const loop = () => {
+    const rot = Math.max(-8, Math.min(8, (tx - x) * .05));
+    x += (tx - x) * .14; y += (ty - y) * .14;
+    peek.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${rot}deg)`;
+    raf = on || Math.abs(tx - x) > .5 ? requestAnimationFrame(loop) : 0;
+  };
+  $$('.svc__row').forEach((row, i) => {
+    row.addEventListener('pointerenter', () => {
+      if (!warmed) { warmed = true; SVC_IMG.forEach(src => { new Image().src = src; }); }
+      if (img.getAttribute('src') !== SVC_IMG[i]) img.src = SVC_IMG[i];
+      on = true; peek.classList.add('is-on');
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+  });
+  $('.svc').addEventListener('pointerleave', () => { on = false; peek.classList.remove('is-on'); });
+  host.addEventListener('pointermove', e => {
+    const r = host.getBoundingClientRect();
+    tx = e.clientX - r.left + 40; ty = e.clientY - r.top;
+    if (!on) { x = tx; y = ty; }
+  });
+}
+
+/* ---------- services → calculator ---------- */
+$$('.svc__row').forEach(b => b.addEventListener('click', () => {
+  selectService(b.dataset.service);
+  scrollToEl($('#calc'));
+  flashCalc();
+}));
+
+/* ---------- magnetic buttons ---------- */
+if (finePointer && motion) {
+  $$('[data-magnetic]').forEach(el => {
+    const xTo = G.quickTo(el, 'x', { duration: 0.6, ease: 'power3.out' });
+    const yTo = G.quickTo(el, 'y', { duration: 0.6, ease: 'power3.out' });
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      xTo((e.clientX - r.left - r.width / 2) * 0.25);
+      yTo((e.clientY - r.top - r.height / 2) * 0.35);
+    });
+    el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+  });
+}
+
+/* ---------- calculator ---------- */
+const form = $('#calc-form');
+const MODES = ['Море', 'Авто', 'Залізниця'];
+const tons = $('#tons'), tonsOut = $('#tons-out');
+const fName = form.elements.namedItem('name');
+const calcVisual = $('.calc__visual'), calcMedia = $$('.calc__media');
+let calcVisible = false;
+calcVisual.setAttribute('data-vmanaged', '');
+
+function showCalcMedia(i) {
+  calcMedia.forEach((m, n) => {
+    m.classList.toggle('is-on', n === i);
+    const v = $('video', m);
+    if (v) n === i && calcVisible ? play(v) : pause(v);
+  });
+}
+new IntersectionObserver(([e]) => { calcVisible = e.isIntersecting; showCalcMedia(+form.mode.value); }, { rootMargin: '200px 0px' }).observe(calcVisual);
+
+function setMode(i) {
+  const r = form.querySelector(`input[name=mode][value="${i}"]`);
+  if (!r) return;
+  r.checked = true;
+  onMode();
+}
+function onMode() {
+  const i = +form.mode.value;
+  $('#calc-chip').textContent = MODES[i];
+  showCalcMedia(i);
+  updateSummary();
+}
+function selectService(name) {
+  const box = form.querySelector(`input[name=svc][value="${name}"]`);
+  if (box) box.checked = true;
+  updateSummary();
+}
+function flashCalc() {
+  calcVisual.classList.remove('flash'); void calcVisual.offsetWidth; calcVisual.classList.add('flash');
+}
+function updateRange() {
+  const p = (tons.value - tons.min) / (tons.max - tons.min) * 100;
+  tons.style.setProperty('--p', p + '%');
+  tonsOut.textContent = fmt(+tons.value) + ' т';
+}
+function updateSummary() {
+  const svcs = $$('input[name=svc]:checked', form).map(x => x.value);
+  const route = [form.from.value.trim(), form.to.value.trim()].filter(Boolean).join(' → ');
+  const cargo = $('input[name=cargo]:checked', form)?.value, dir = $('input[name=dir]:checked', form)?.value;
+  const parts = [MODES[+form.mode.value], fmt(+tons.value) + ' т'];
+  if (cargo) parts.splice(1, 0, cargo.toLowerCase());
+  if (dir) parts.push(dir.toLowerCase());
+  if (route) parts.push(route);
+  if (svcs.length) parts.push(svcs.length === 1 ? svcs[0] : svcs.length + ' послуги');
+  $('#calc-summary').textContent = parts.join(' · ');
+}
+form.addEventListener('change', e => { e.target.name === 'mode' ? onMode() : updateSummary(); });
+form.addEventListener('input', e => {
+  if (e.target === tons) updateRange();
+  if (['from', 'to'].includes(e.target.name) || e.target === tons) updateSummary();
+  if (e.target.closest('.field')) e.target.closest('.field').classList.remove('is-error');
+});
+
+/* phone mask: +380 XX XXX XX XX */
+const phone = form.phone;
+phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+380 '; });
+phone.addEventListener('input', () => {
+  let d = phone.value.replace(/\D/g, '');
+  if (!d.startsWith('380')) d = '380' + d.replace(/^3?8?0?/, '');
+  d = d.slice(0, 12);
+  const p = [d.slice(0, 3), d.slice(3, 5), d.slice(5, 8), d.slice(8, 10), d.slice(10, 12)].filter(Boolean);
+  phone.value = '+' + p.join(' ');
+});
+
+/* Endpoint for real submissions (CRM, Telegram bot, form backend). Empty = offline mode. */
+const FORM_ENDPOINT = '';
+let lastRequest = '';
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const nameOk = fName.value.trim().length >= 2;
+  const phoneOk = phone.value.replace(/\D/g, '').length === 12;
+  $('[data-field=name]').classList.toggle('is-error', !nameOk);
+  $('[data-field=phone]').classList.toggle('is-error', !phoneOk);
+  if (!nameOk || !phoneOk) { (nameOk ? phone : fName).focus(); return; }
+  const svcs = $$('input[name=svc]:checked', form).map(x => x.value);
+  const data = {
+    mode: MODES[+form.mode.value], services: svcs, tons: +tons.value,
+    cargo: $('input[name=cargo]:checked', form)?.value || '', direction: $('input[name=dir]:checked', form)?.value || '',
+    from: form.from.value.trim(), to: form.to.value.trim(),
+    name: fName.value.trim(), phone: phone.value, comment: form.comment.value.trim()
+  };
+  lastRequest = [
+    'Запит на розрахунок — Formica Logistics',
+    `Транспорт: ${data.mode}`,
+    data.cargo ? `Вантаж: ${data.cargo}` : '',
+    data.direction ? `Напрямок: ${data.direction}` : '',
+    `Послуги: ${svcs.join(', ') || 'уточнити з менеджером'}`,
+    `Обсяг: ${fmt(data.tons)} т`,
+    data.from || data.to ? `Маршрут: ${data.from || '—'} → ${data.to || '—'}` : '',
+    `Контакт: ${data.name}, ${data.phone}`,
+    data.comment ? `Коментар: ${data.comment}` : ''
+  ].filter(Boolean).join('\n');
+  const done = $('#calc-done');
+  $('#calc-text').textContent = lastRequest;
+  $('#calc-wa').href = 'https://wa.me/380732772377?text=' + encodeURIComponent(lastRequest);
+  if (FORM_ENDPOINT) {
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      if (!res.ok) throw new Error(res.status);
+      done.querySelector('h3').textContent = 'Дякуємо! Заявку надіслано';
+    } catch { done.querySelector('h3').textContent = 'Не вдалося надіслати — зателефонуйте нам'; }
+  }
+  done.hidden = false;
+  if (motion) G.from(done, { y: 30, opacity: 0, duration: 0.7, ease: 'power3.out' });
+});
+$('#calc-copy').addEventListener('click', async e => {
+  try { await navigator.clipboard.writeText(lastRequest); e.currentTarget.textContent = 'Скопійовано ✓'; }
+  catch { e.currentTarget.textContent = 'Виділіть текст вище'; }
+});
+updateRange();
+updateSummary();
+</script>
+</body>
+</html>
